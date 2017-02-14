@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="800">
     <Canvas>
-        <Ellipse Name="track0" Opacity=".7" Panel.ZIndex="60" Fill="Purple" Width="20" Height="20" Canvas.Left="0" Canvas.Top="0"></Ellipse>
-        <Ellipse Name="track1" Opacity=".7" Panel.ZIndex="60" Fill="White" Width="20" Height="20" Canvas.Left="0" Canvas.Top="0"></Ellipse>
-        <Line Name="trackLine" Opacity=".7" Panel.ZIndex="60" Stroke="White" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="0"></Line>
+        <Ellipse Name="track0" Opacity="1" Panel.ZIndex="60" Fill="Purple" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Ellipse Name="track1" Opacity="1" Panel.ZIndex="60" Fill="Black" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Line Name="trackLine" Opacity="1" Panel.ZIndex="60" Stroke="Black" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="0"></Line>
         <Rectangle Name="bg" Width="466" Height="700" Canvas.Left="450">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="hiddenimage1.jpg"></ImageBrush>

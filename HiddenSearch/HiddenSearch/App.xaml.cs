@@ -19,7 +19,7 @@ namespace HiddenSearch
         public ResourceDictionary dict;
         public App()
         {
-            _eyeXHost = new WpfEyeXHost();
+           _eyeXHost = new WpfEyeXHost();
             _eyeXHost.Start();
         }
         protected override void OnExit(ExitEventArgs e)
