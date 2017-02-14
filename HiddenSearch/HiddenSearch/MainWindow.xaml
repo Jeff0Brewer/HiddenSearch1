@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HiddenSearch"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="800">
+        Title="MainWindow" Height="900" Width="1200">
     <Canvas>
         <Ellipse Name="track0" Opacity="1" Panel.ZIndex="60" Fill="Purple" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
         <Ellipse Name="track1" Opacity="1" Panel.ZIndex="60" Fill="Black" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
@@ -13,6 +13,11 @@
         <Rectangle Name="bg" Width="590" Height="890">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="hiddenimage1.jpg"></ImageBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Name="key" Width="360" Height="700" Canvas.Left="680">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="answerkey.jpg"></ImageBrush>
             </Rectangle.Fill>
         </Rectangle>
         <Rectangle Name="hat" Width="78" Height="26" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="405" Canvas.Top="137"></Rectangle>

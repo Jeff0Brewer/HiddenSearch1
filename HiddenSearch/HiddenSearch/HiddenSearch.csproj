@@ -106,6 +106,7 @@
     <Resource Include="hiddenimage1.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="answerkey.jpg" />
     <Content Include="Tobii.EyeX.Client.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
