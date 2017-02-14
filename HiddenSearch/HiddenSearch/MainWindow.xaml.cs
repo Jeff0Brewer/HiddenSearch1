@@ -113,8 +113,10 @@ namespace HiddenSearch
 
         private void itemClicked(object sender, MouseButtonEventArgs e)
         {
-            Rectangle circle = sender as Rectangle;
-            circle.Opacity = .5;
+            Rectangle box = sender as Rectangle;
+            Rectangle key = FindName("s" + box.Name) as Rectangle;
+            box.Opacity = .5;
+            key.Opacity = .8;
         }
     }
 }

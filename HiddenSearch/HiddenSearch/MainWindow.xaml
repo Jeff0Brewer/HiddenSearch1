@@ -167,5 +167,50 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
+        <Rectangle Name="comb" Width="27" Height="8" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="477" Canvas.Top="609" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-44.426"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Name="sbird" Width="78" Height="62" Fill="Black" Opacity="0" Canvas.Left="708" Canvas.Top="79"/>
+        <Rectangle Name="spear" Width="52" Height="75" Fill="Black" Opacity="0" Canvas.Left="813" Canvas.Top="10"/>
+        <Rectangle Name="spencil" Width="134" Height="32" Fill="Black" Opacity="0" Canvas.Left="897" Canvas.Top="28"/>
+        <Rectangle Name="scone" Width="50" Height="78" Fill="Black" Opacity="0" Canvas.Left="885" Canvas.Top="96"/>
+        <Rectangle Name="scandle" Width="50" Height="90" Fill="Black" Opacity="0" Canvas.Left="971" Canvas.Top="96"/>
+        <Rectangle Name="sbell" Width="50" Height="58" Fill="Black" Opacity="0" Canvas.Left="791" Canvas.Top="128"/>
+        <Rectangle Name="scandy" Width="50" Height="45" Fill="Black" Opacity="0" Canvas.Left="873" Canvas.Top="223"/>
+        <Rectangle Name="scomb"  Width="41" Height="36" Fill="Black" Opacity="0" Canvas.Left="980" Canvas.Top="232"/>
+        <Rectangle Name="sornament" Width="50" Height="64" Fill="Black" Opacity="0" Canvas.Left="971" Canvas.Top="306"/>
+        <Rectangle Name="smug" Width="62" Height="43" Fill="Black" Opacity="0" Canvas.Left="873" Canvas.Top="306"/>
+        <Rectangle Name="sshoe" Width="71" Height="43" Fill="Black" Opacity="0" Canvas.Left="782" Canvas.Top="346"/>
+        <Rectangle Name="sjinglebell" Width="50" Height="51" Fill="Black" Opacity="0" Canvas.Left="885" Canvas.Top="375"/>
+        <Rectangle Name="smushroom" Width="59" Height="60" Fill="Black" Opacity="0" Canvas.Left="782" Canvas.Top="422"/>
+        <Rectangle Name="senvelope" Width="87" Height="51" Fill="Black" Opacity="0" Canvas.Left="680" Canvas.Top="408"/>
+        <Rectangle Name="smouse" Width="69" Height="51" Fill="Black" Opacity="0" Canvas.Left="698" Canvas.Top="319"/>
+        <Rectangle Name="smitten" Width="69" Height="92" Fill="Black" Opacity="0" Canvas.Left="698" Canvas.Top="191"/>
+        <Rectangle Name="scarrot" Width="50" Height="92" Fill="Black" Opacity="0" Canvas.Left="791" Canvas.Top="211"/>
+        <Rectangle Name="scandycane" Width="70" Height="81" Fill="Black" Opacity="0" Canvas.Left="940" Canvas.Top="422"/>
+        <Rectangle Name="speppermintstick" Width="117" Height="40" Fill="Black" Opacity="0" Canvas.Left="680" Canvas.Top="499"/>
+        <Rectangle Name="shat" Width="86" Height="46" Fill="Black" Opacity="0" Canvas.Left="802" Canvas.Top="531"/>
+        <Rectangle Name="sslipper" Width="75" Height="46" Fill="Black" Opacity="0" Canvas.Left="935" Canvas.Top="531"/>
+        <Rectangle Name="spartridge" Width="117" Height="82" Fill="Black" Opacity="0" Canvas.Left="680" Canvas.Top="577"/>
+        <Rectangle Name="sfish" Width="117" Height="52" Fill="Black" Opacity="0" Canvas.Left="802" Canvas.Top="595"/>
+        <Rectangle Name="ssock" Width="96" Height="89" Fill="Black" Opacity="0" Canvas.Left="932" Canvas.Top="595"/>
+        <Rectangle Name="candy" Width="31" Height="17" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="289" Canvas.Top="266"/>
+        <Rectangle Name="slipper" Width="47" Height="34" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="235" Canvas.Top="350" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="122.159"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
     </Canvas>
 </Window>
