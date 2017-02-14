@@ -1,0 +1,17 @@
+c:\users\master\documents\visual studio 2015\Projects\HiddenSearch\HiddenSearch\bin\Debug\HiddenSearch.exe.config
+c:\users\master\documents\visual studio 2015\Projects\HiddenSearch\HiddenSearch\obj\Debug\MainWindow.g.cs
+c:\users\master\documents\visual studio 2015\Projects\HiddenSearch\HiddenSearch\obj\Debug\App.g.cs
+c:\users\master\documents\visual studio 2015\Projects\HiddenSearch\HiddenSearch\obj\Debug\HiddenSearch_MarkupCompile.cache
+c:\users\master\documents\visual studio 2015\Projects\HiddenSearch\HiddenSearch\obj\Debug\HiddenSearch_MarkupCompile.lref
+c:\users\master\documents\visual studio 2015\Projects\HiddenSearch\HiddenSearch\bin\Debug\HiddenSearch.exe
+c:\users\master\documents\visual studio 2015\Projects\HiddenSearch\HiddenSearch\bin\Debug\HiddenSearch.pdb
+c:\users\master\documents\visual studio 2015\Projects\HiddenSearch\HiddenSearch\obj\Debug\MainWindow.baml
+c:\users\master\documents\visual studio 2015\Projects\HiddenSearch\HiddenSearch\obj\Debug\HiddenSearch.g.resources
+c:\users\master\documents\visual studio 2015\Projects\HiddenSearch\HiddenSearch\obj\Debug\HiddenSearch.Properties.Resources.resources
+c:\users\master\documents\visual studio 2015\Projects\HiddenSearch\HiddenSearch\obj\Debug\HiddenSearch.csproj.GenerateResource.Cache
+c:\users\master\documents\visual studio 2015\Projects\HiddenSearch\HiddenSearch\obj\Debug\HiddenSearch.exe
+c:\users\master\documents\visual studio 2015\Projects\HiddenSearch\HiddenSearch\obj\Debug\HiddenSearch.pdb
+c:\users\master\documents\visual studio 2015\Projects\HiddenSearch\HiddenSearch\bin\Debug\EyeXFramework.dll
+c:\users\master\documents\visual studio 2015\Projects\HiddenSearch\HiddenSearch\bin\Debug\Tobii.EyeX.Client.Net20.dll
+c:\users\master\documents\visual studio 2015\Projects\HiddenSearch\HiddenSearch\bin\Debug\EyeXFramework.pdb
+c:\users\master\documents\visual studio 2015\Projects\HiddenSearch\HiddenSearch\obj\Debug\HiddenSearch.csprojResolveAssemblyReference.cache
