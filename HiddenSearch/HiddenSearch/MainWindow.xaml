@@ -10,10 +10,157 @@
         <Ellipse Name="track0" Opacity="1" Panel.ZIndex="60" Fill="Purple" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
         <Ellipse Name="track1" Opacity="1" Panel.ZIndex="60" Fill="Black" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
         <Line Name="trackLine" Opacity="1" Panel.ZIndex="60" Stroke="Black" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="0"></Line>
-        <Rectangle Name="bg" Width="466" Height="700" Canvas.Left="450">
+        <Rectangle Name="bg" Width="590" Height="890">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="hiddenimage1.jpg"></ImageBrush>
             </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Name="hat" Width="78" Height="26" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="405" Canvas.Top="137"></Rectangle>
+        <Rectangle Name="candycane" Width="73" Height="29" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="304" Canvas.Top="114" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="22.498"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Name="pencil" Width="104" Height="13" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="178" Canvas.Top="435" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="95.28"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Name="peppermintstick" Width="57" Height="10" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="357" Canvas.Top="567" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="107.677"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Name="candle" Width="76" Height="16" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="224" Canvas.Top="161" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="87.51"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Name="cone" Width="59" Height="34" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="198" Canvas.Top="598" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="22.712"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Name="sock" Width="80" Height="74" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="334" Canvas.Top="349" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-20.148"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Name="jinglebell" Width="22" Height="17" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="470" Canvas.Top="179"/>
+        <Rectangle Name="fish" Width="96" Height="38" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="36" Canvas.Top="122" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="83.418"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Name="carrot" Width="78" Height="25" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="423" Canvas.Top="643" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-4.312"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Name="ornament" Width="47" Height="34" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="88" Canvas.Top="315"/>
+        <Rectangle Name="mug" Width="29" Height="28" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="485" Canvas.Top="431"/>
+        <Rectangle Name="bell" Width="31" Height="26" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="337" Canvas.Top="83" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-41.204"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Name="shoe" Width="54" Height="31" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="460" Canvas.Top="329"/>
+        <Rectangle Name="pear" Width="46" Height="19" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="97" Canvas.Top="130" RenderTransformOrigin="0.425,0.435">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-89.414"/>
+                    <TranslateTransform X="-0.158" Y="2.681"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Name="bird" Width="83" Height="31" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="413" Canvas.Top="530" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-84.692"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Name="mitten" Width="48" Height="29" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="482" Canvas.Top="462"/>
+        <Rectangle Name="mushroom" Width="36" Height="33" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="371" Canvas.Top="306"/>
+        <Rectangle Name="mouse" Width="48" Height="29" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="502" Canvas.Top="585" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-26.66"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Name="envelope" Width="43" Height="31" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="198" Canvas.Top="331" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-23.39"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Name="partridge" Width="92" Height="26" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="107" Canvas.Top="129" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-45.888"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
         </Rectangle>
     </Canvas>
 </Window>

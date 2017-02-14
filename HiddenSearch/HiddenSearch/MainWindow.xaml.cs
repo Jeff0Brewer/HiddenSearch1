@@ -111,6 +111,10 @@ namespace HiddenSearch
             trackLine.Y2 = Canvas.GetTop(track1) + 5;
         }
 
-
+        private void itemClicked(object sender, MouseButtonEventArgs e)
+        {
+            Rectangle circle = sender as Rectangle;
+            circle.Opacity = .5;
+        }
     }
 }
