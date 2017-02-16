@@ -121,7 +121,7 @@ namespace HiddenSearch
 
         void update(object sender, EventArgs e)
         {
-            sending = fastTrack.X.ToString() + "|" + fastTrack.Y.ToString() + ":" + fixationTrack.X.ToString() + "!" + fixationTrack.Y.ToString() + "(" + track0.Opacity.ToString();
+            sending = ((int)fastTrack.X).ToString() + "|" + ((int)fastTrack.Y).ToString() + ":" + ((int)fixationTrack.X).ToString() + "!" + ((int)fixationTrack.Y).ToString() + "(" + ((int)(100*track0.Opacity)).ToString();
             //If user pressed Receiver or Cursor button but communication haven't started yet or has terminated, start a thread on tryCommunicateReceiver()
             if (ReceiverOn && communication_started_Receiver == false)
             {
@@ -149,6 +149,18 @@ namespace HiddenSearch
                 otherFixationTrack.X = Convert.ToInt32(received.Substring(ind_2 + 1, ind_3 - ind_2 - 1));
                 otherFixationTrack.Y = Convert.ToInt32(received.Substring(ind_3 + 1, ind_4 - ind_3 - 1));
                 track0.Opacity = Convert.ToInt32(received.Substring(ind_4 + 1, received.Length - ind_4 - 1));
+
+                otherFixationTrack = PointFromScreen(otherFixationTrack);
+                Canvas.SetLeft(otrack0, otherFixationTrack.X);
+                Canvas.SetTop(otrack0, otherFixationTrack.Y);
+                otrackLine.X1 = otherFixationTrack.X + 5;
+                otrackLine.Y1 = otherFixationTrack.Y + 5;
+
+                otherFastTrack = PointFromScreen(otherFastTrack);
+                Canvas.SetLeft(otrack1,otherFixationTrack.X);
+                Canvas.SetTop(otrack1, otherFixationTrack.Y);
+                otrackLine.X2 = Canvas.GetLeft(otrack1) + 5;
+                otrackLine.Y2 = Canvas.GetTop(otrack1) + 5;
             }
             
             if (fixShift & fixationTrack.X != double.NaN & fixationTrack.Y != double.NaN)
