@@ -47,7 +47,7 @@ namespace HiddenSearch
         private System.Windows.Threading.DispatcherTimer dispatcherTimer;
         private static String sending;
         private static String received;
-        private static string defaultSenderIP = "129.105.146.138"; 
+        private static string defaultSenderIP = "10.105.34.139"; 
 
         Point fixationTrack = new Point(0, 0);
         Point fastTrack = new Point(0, 0);
@@ -118,6 +118,7 @@ namespace HiddenSearch
 
         void update(object sender, EventArgs e)
         {
+            sending = fastTrack.X.ToString() + "|" + fastTrack.Y.ToString();
             //If user pressed Receiver or Cursor button but communication haven't started yet or has terminated, start a thread on tryCommunicateReceiver()
             if (ReceiverOn && communication_started_Receiver == false)
             {
@@ -133,6 +134,11 @@ namespace HiddenSearch
                 communicateThread_Sender = new System.Threading.Thread(new ThreadStart(() => tryCommunicateSender(sending)));
                 communicateThread_Sender.Start();
             }
+            if (received != null)
+            {
+                test.Text = received.ToString();
+            }
+            
             if (fixShift & fixationTrack.X != double.NaN & fixationTrack.Y != double.NaN)
             {
                 fixationTrack = PointFromScreen(fixationTrack);
