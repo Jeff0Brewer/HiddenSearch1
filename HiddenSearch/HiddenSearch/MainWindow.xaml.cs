@@ -47,10 +47,13 @@ namespace HiddenSearch
         private System.Windows.Threading.DispatcherTimer dispatcherTimer;
         private static String sending;
         private static String received;
-        private static string defaultSenderIP = "10.105.34.139"; 
+        private static string defaultSenderIP = "10.105.34.139";
+        int ind_1, ind_2, ind_3, ind_4;
 
         Point fixationTrack = new Point(0, 0);
         Point fastTrack = new Point(0, 0);
+        Point otherFixationTrack = new Point(0, 0);
+        Point otherFastTrack = new Point(0, 0);
         double fixationStart = 0;
         bool fixStart = true;
         bool fixShift = false;
@@ -118,7 +121,7 @@ namespace HiddenSearch
 
         void update(object sender, EventArgs e)
         {
-            sending = fastTrack.X.ToString() + "|" + fastTrack.Y.ToString();
+            sending = fastTrack.X.ToString() + "|" + fastTrack.Y.ToString() + ":" + fixationTrack.X.ToString() + "!" + fixationTrack.Y.ToString() + "(" + track0.Opacity.ToString();
             //If user pressed Receiver or Cursor button but communication haven't started yet or has terminated, start a thread on tryCommunicateReceiver()
             if (ReceiverOn && communication_started_Receiver == false)
             {
@@ -137,6 +140,15 @@ namespace HiddenSearch
             if (received != null)
             {
                 test.Text = received.ToString();
+                ind_1 = received.IndexOf("|");
+                ind_2 = received.IndexOf(":");
+                ind_3 = received.IndexOf("!");
+                ind_4 = received.IndexOf("(");
+                otherFastTrack.X = Convert.ToInt32(received.Substring(0, ind_1 - 1));
+                otherFastTrack.Y = Convert.ToInt32(received.Substring(ind_1 + 1, ind_2 - ind_1 - 1));
+                otherFixationTrack.X = Convert.ToInt32(received.Substring(ind_2 + 1, ind_3 - ind_2 - 1));
+                otherFixationTrack.Y = Convert.ToInt32(received.Substring(ind_3 + 1, ind_4 - ind_3 - 1));
+                track0.Opacity = Convert.ToInt32(received.Substring(ind_4 + 1, received.Length - ind_4 - 1));
             }
             
             if (fixShift & fixationTrack.X != double.NaN & fixationTrack.Y != double.NaN)
