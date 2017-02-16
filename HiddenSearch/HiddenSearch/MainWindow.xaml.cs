@@ -148,7 +148,7 @@ namespace HiddenSearch
                 otherFastTrack.Y = Convert.ToInt32(received.Substring(ind_1 + 1, ind_2 - ind_1 - 1));
                 otherFixationTrack.X = Convert.ToInt32(received.Substring(ind_2 + 1, ind_3 - ind_2 - 1));
                 otherFixationTrack.Y = Convert.ToInt32(received.Substring(ind_3 + 1, ind_4 - ind_3 - 1));
-                track0.Opacity = Convert.ToInt32(received.Substring(ind_4 + 1, received.Length - ind_4 - 1));
+                track0.Opacity = Convert.ToInt32(received.Substring(ind_4 + 1, received.Length - ind_4 - 1))/100;
 
                 otherFixationTrack = PointFromScreen(otherFixationTrack);
                 Canvas.SetLeft(otrack0, otherFixationTrack.X);
@@ -157,8 +157,8 @@ namespace HiddenSearch
                 otrackLine.Y1 = otherFixationTrack.Y + 5;
 
                 otherFastTrack = PointFromScreen(otherFastTrack);
-                Canvas.SetLeft(otrack1,otherFixationTrack.X);
-                Canvas.SetTop(otrack1, otherFixationTrack.Y);
+                Canvas.SetLeft(otrack1,otherFastTrack.X);
+                Canvas.SetTop(otrack1, otherFastTrack.Y);
                 otrackLine.X2 = Canvas.GetLeft(otrack1) + 5;
                 otrackLine.Y2 = Canvas.GetTop(otrack1) + 5;
             }
