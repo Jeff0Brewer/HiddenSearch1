@@ -13,10 +13,41 @@
         <Ellipse Name="track0" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Fill="Purple" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
         <Ellipse Name="track1" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Fill="Black" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
         <Line Name="trackLine" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Stroke="Black" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="0"></Line>
-        <Ellipse Name="otrack0" Visibility="Visible" Opacity="1" Panel.ZIndex="60" Fill="Red" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
-        <Ellipse Name="otrack1" Visibility="Visible" Opacity="1" Panel.ZIndex="60" Fill="Black" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
-        <Line Name="otrackLine" Visibility="Visible" Opacity="1" Panel.ZIndex="60" Stroke="Black" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="0"></Line>
-        <Ellipse Name="doubleHighlight" Visibility="Visible" Opacity=".7" Panel.ZIndex="60" StrokeThickness="5" Stroke="DarkBlue" Width="50" Height="50" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Ellipse Name="otrack0" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Fill="Red" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Ellipse Name="otrack1" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Fill="Black" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Line Name="otrackLine" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Stroke="Black" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="0"></Line>
+        <Ellipse Name="doubleHighlight" Visibility="Hidden" Opacity=".7" Panel.ZIndex="60" StrokeThickness="5" Stroke="DarkBlue" Width="50" Height="50" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Button x:Name="GazeButton"
+                Panel.ZIndex="57"
+                Content="Turn on Gazepath"
+                Canvas.Right="30"
+                Canvas.Top="130"
+                HorizontalAlignment="Center"
+                Margin="10,10,0,0"
+                VerticalAlignment="Top"
+                Width="75"
+                Click="gazeButton"/>
+        <Button x:Name="FixButton"
+                Panel.ZIndex="57"
+                Content="Turn on Fixation"
+                Canvas.Right="30"
+                Canvas.Top="160"
+                HorizontalAlignment="Center"
+                Margin="10,10,0,0"
+                VerticalAlignment="Top"
+                Visibility="Visible"
+                Click="fixButton"/>
+        <Button x:Name="HeatmapButton"
+                Panel.ZIndex="57"
+                Content="Turn on Heatmap"
+                Canvas.Right="30"
+                Canvas.Top="190"
+                HorizontalAlignment="Center"
+                Margin="10,10,0,0"
+                VerticalAlignment="Top"
+                Visibility="Visible"
+                Click="heatmapButton"/>
+
         <Rectangle Name="bg" Width="590" Height="890" PreviewMouseDown="bg_PreviewMouseDown">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="hiddenimage1.jpg"></ImageBrush>
@@ -28,7 +59,7 @@
             </Rectangle.Fill>
         </Rectangle>
         <Rectangle Name="hat" Width="78" Height="26" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="405" Canvas.Top="137"></Rectangle>
-        <Rectangle Name="candycane" Width="73" Height="29" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="304" Canvas.Top="114" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Name="candycane" Panel.ZIndex="800" Width="73" Height="29" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="304" Canvas.Top="114" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -38,7 +69,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Name="pencil" Width="104" Height="13" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="178" Canvas.Top="435" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Name="pencil" Panel.ZIndex="800" Width="104" Height="13" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="178" Canvas.Top="435" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -48,7 +79,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Name="peppermintstick" Width="57" Height="10" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="357" Canvas.Top="567" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Name="peppermintstick" Panel.ZIndex="800" Width="57" Height="10" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="357" Canvas.Top="567" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -58,7 +89,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Name="candle" Width="76" Height="16" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="224" Canvas.Top="161" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Name="candle" Panel.ZIndex="800" Width="76" Height="16" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="224" Canvas.Top="161" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -68,7 +99,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Name="cone" Width="59" Height="34" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="198" Canvas.Top="598" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Name="cone" Panel.ZIndex="800" Width="59" Height="34" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="198" Canvas.Top="598" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -78,7 +109,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Name="sock" Width="80" Height="74" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="334" Canvas.Top="349" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Name="sock" Panel.ZIndex="800" Width="80" Height="74" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="334" Canvas.Top="349" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -88,8 +119,8 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Name="jinglebell" Width="22" Height="17" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="470" Canvas.Top="179"/>
-        <Rectangle Name="fish" Width="96" Height="38" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="36" Canvas.Top="122" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Name="jinglebell" Panel.ZIndex="800" Width="22" Height="17" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="470" Canvas.Top="179"/>
+        <Rectangle Name="fish" Panel.ZIndex="800" Width="96" Height="38" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="36" Canvas.Top="122" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -99,7 +130,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Name="carrot" Width="78" Height="25" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="423" Canvas.Top="643" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Name="carrot" Panel.ZIndex="800" Width="78" Height="25" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="423" Canvas.Top="643" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -109,9 +140,9 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Name="ornament" Width="47" Height="34" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="88" Canvas.Top="315"/>
-        <Rectangle Name="mug" Width="29" Height="28" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="485" Canvas.Top="431"/>
-        <Rectangle Name="bell" Width="31" Height="26" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="337" Canvas.Top="83" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Name="ornament" Panel.ZIndex="800" Width="47" Height="34" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="88" Canvas.Top="315"/>
+        <Rectangle Name="mug" Panel.ZIndex="800" Width="29" Height="28" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="485" Canvas.Top="431"/>
+        <Rectangle Name="bell" Panel.ZIndex="800" Width="31" Height="26" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="337" Canvas.Top="83" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -121,8 +152,8 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Name="shoe" Width="54" Height="31" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="460" Canvas.Top="329"/>
-        <Rectangle Name="pear" Width="46" Height="19" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="97" Canvas.Top="130" RenderTransformOrigin="0.425,0.435">
+        <Rectangle Name="shoe" Panel.ZIndex="800" Width="54" Height="31" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="460" Canvas.Top="329"/>
+        <Rectangle Name="pear" Panel.ZIndex="800" Width="46" Height="19" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="97" Canvas.Top="130" RenderTransformOrigin="0.425,0.435">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -132,7 +163,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Name="bird" Width="83" Height="31" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="413" Canvas.Top="530" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Name="bird" Panel.ZIndex="800" Width="83" Height="31" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="413" Canvas.Top="530" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -142,9 +173,9 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Name="mitten" Width="48" Height="29" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="482" Canvas.Top="462"/>
-        <Rectangle Name="mushroom" Width="36" Height="33" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="371" Canvas.Top="306"/>
-        <Rectangle Name="mouse" Width="48" Height="29" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="502" Canvas.Top="585" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Name="mitten" Panel.ZIndex="800" Width="48" Height="29" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="482" Canvas.Top="462"/>
+        <Rectangle Name="mushroom" Panel.ZIndex="800" Width="36" Height="33" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="371" Canvas.Top="306"/>
+        <Rectangle Name="mouse" Panel.ZIndex="800" Width="48" Height="29" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="502" Canvas.Top="585" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -154,7 +185,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Name="envelope" Width="43" Height="31" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="198" Canvas.Top="331" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Name="envelope" Panel.ZIndex="800" Width="43" Height="31" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="198" Canvas.Top="331" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -164,7 +195,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Name="partridge" Width="92" Height="26" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="107" Canvas.Top="129" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Name="partridge" Panel.ZIndex="800" Width="92" Height="26" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="107" Canvas.Top="129" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -174,7 +205,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Name="comb" Width="27" Height="8" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="477" Canvas.Top="609" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Name="comb" Panel.ZIndex="800" Width="27" Height="8" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="477" Canvas.Top="609" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -208,8 +239,8 @@
         <Rectangle Name="spartridge" Width="117" Height="82" Fill="Black" Opacity="0" Canvas.Left="680" Canvas.Top="577"/>
         <Rectangle Name="sfish" Width="117" Height="52" Fill="Black" Opacity="0" Canvas.Left="802" Canvas.Top="595"/>
         <Rectangle Name="ssock" Width="96" Height="89" Fill="Black" Opacity="0" Canvas.Left="932" Canvas.Top="595"/>
-        <Rectangle Name="candy" Width="31" Height="17" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="289" Canvas.Top="266"/>
-        <Rectangle Name="slipper" Width="47" Height="34" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="235" Canvas.Top="350" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Name="candy" Panel.ZIndex="800" Width="31" Height="17" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="289" Canvas.Top="266"/>
+        <Rectangle Name="slipper" Panel.ZIndex="800" Width="47" Height="34" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="235" Canvas.Top="350" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

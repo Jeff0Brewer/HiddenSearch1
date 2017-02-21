@@ -83,6 +83,11 @@ namespace HiddenSearch
         Ellipse[] ellipses;
         double ellipse_size = 80;
 
+        //settings
+        bool gazeSetting = false;
+        bool fixSetting = false;
+        bool heatmapSetting = false;
+
         public MainWindow()
         {
             DataContext = this;
@@ -116,7 +121,7 @@ namespace HiddenSearch
                 Share_Status_Text.Visibility = Visibility.Visible;
                 communication_started_Sender = false;
             }
-            setup();
+            //setup();
         }
 
         private void setup() {
@@ -129,6 +134,56 @@ namespace HiddenSearch
                 doubleHighlight.Visibility = Visibility.Hidden;
             }
         }
+
+        #region buttons
+        private void gazeButton(object sender, RoutedEventArgs e)
+        {
+            gazeSetting = !gazeSetting;
+            if (gazeSetting)
+            {
+                GazeButton.Content = "Turn off Gazepath";
+                otrack0.Visibility = Visibility.Visible;
+                otrack1.Visibility = Visibility.Visible;
+                otrackLine.Visibility = Visibility.Visible;
+            } else
+            {
+                GazeButton.Content = "Turn on Gazepath";
+                otrack0.Visibility = Visibility.Hidden;
+                otrack1.Visibility = Visibility.Hidden;
+                otrackLine.Visibility = Visibility.Hidden;
+            }
+        }
+        private void fixButton(object sender, RoutedEventArgs e)
+        {
+            fixSetting = !fixSetting;
+            if (fixSetting)
+            {
+                FixButton.Content = "Turn off Fixation";
+                doubleHighlight.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                FixButton.Content = "Turn on Fixation";
+                doubleHighlight.Visibility = Visibility.Hidden;
+            }
+        }
+        private void heatmapButton(object sender, RoutedEventArgs e)
+        {
+            heatmapSetting = !heatmapSetting;
+            if (heatmapSetting)
+            {
+                HeatmapButton.Content = "Turn off Heatmap";
+            }
+            else
+            {
+                HeatmapButton.Content = "Turn on Heatmap";
+                for (int i = 0; i < num_ellipses; i++)
+                {
+                    ellipses[i].Visibility = Visibility.Hidden;
+                }
+            }
+        }
+        #endregion
 
         private void fixTrack(object s, EyeXFramework.FixationEventArgs e)
         {
@@ -194,15 +249,17 @@ namespace HiddenSearch
                 otrackLine.X1 = otherFixationTrack.X + 5;
                 otrackLine.Y1 = otherFixationTrack.Y + 5;
 
-                //addPermColor(orange, otherFixationTrack.X, otherFixationTrack.Y, ellipse_size); //heatmap
-
                 otherFastTrack = PointFromScreen(otherFastTrack);
                 Canvas.SetLeft(otrack1,otherFastTrack.X);
                 Canvas.SetTop(otrack1, otherFastTrack.Y);
                 otrackLine.X2 = Canvas.GetLeft(otrack1) + 5;
                 otrackLine.Y2 = Canvas.GetTop(otrack1) + 5;
+                if (heatmapSetting)
+                {
+                    addColor(orange, otherFastTrack.X, otherFastTrack.Y, ellipse_size); //heatmap
+                }
             }
-            
+
             if (fixShift & fixationTrack.X != double.NaN & fixationTrack.Y != double.NaN)
             {
                 fixationTrack = PointFromScreen(fixationTrack);
@@ -228,7 +285,7 @@ namespace HiddenSearch
             trackLine.X2 = Canvas.GetLeft(track1) + 5;
             trackLine.Y2 = Canvas.GetTop(track1) + 5;
 
-            addPermColor(orange, left, top, ellipse_size);
+            //addPermColor(orange, left, top, ellipse_size);
             //addColor(orange, left, top, ellipse_size);
 
             doubleTrack();
@@ -267,16 +324,17 @@ namespace HiddenSearch
                 ellipses[i].Width = ellipse_size;
                 ellipses[i].Height = ellipse_size;
                 ellipses[i].Opacity = 0.01;
+                Panel.SetZIndex(ellipses[i], i);
                 ellipses[i].Visibility = Visibility.Hidden;
                 myCanvas.Children.Add(ellipses[i]);
-            
+            }
         }
-
+        #endregion
 
 
         private void doubleTrack() {
             double distance = Math.Sqrt(Math.Pow(fastTrack.X - otherFastTrack.X, 2) + Math.Pow(fastTrack.Y - otherFastTrack.Y, 2));
-            if (distance < 75)
+            if (distance < 125)
             {
                 shareX = (.7*shareX + .3*((fastTrack.X + otherFastTrack.X)/2));
                 shareY = (.7*shareY + .3*((fastTrack.Y + otherFastTrack.Y)/2));
@@ -306,7 +364,6 @@ namespace HiddenSearch
                 shareStart = true;
             }
         }
-        #endregion
 
         private void itemClicked(object sender, MouseButtonEventArgs e)
         {
