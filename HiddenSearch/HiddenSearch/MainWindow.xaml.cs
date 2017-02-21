@@ -34,7 +34,7 @@ namespace HiddenSearch
     {
         private bool SenderOn = true;
         private bool ReceiverOn = true;
-        private static int ReceiverPort = 11000, SenderPort = 11000;//ReceiverPort is the port used by Receiver, SenderPort is the port used by Sender
+        private static int ReceiverPort = 12000, SenderPort = 11000;//ReceiverPort is the port used by Receiver, SenderPort is the port used by Sender
         private bool communication_started_Receiver = false;//indicates whether the Receiver is ready to receive message(coordinates). Used for thread control
         private bool communication_started_Sender = false;//Indicate whether the program is sending its coordinates to others. Used for thread control
         private System.Threading.Thread communicateThread_Receiver; //Thread for receiver
@@ -47,9 +47,12 @@ namespace HiddenSearch
         private System.Windows.Threading.DispatcherTimer dispatcherTimer;
         private static String sending;
         private static String received;
-        private static string defaultSenderIP = "10.105.34.139";
+        private static string defaultSenderIP = "169.254.41.115";
         int ind_1, ind_2, ind_3, ind_4;
 
+        int visualization = 1; //0 for fixation, 1 for double, 2 for heatmap
+
+        //Fixation vis
         Point fixationTrack = new Point(0, 0);
         Point fastTrack = new Point(0, 0);
         Point otherFixationTrack = new Point(0, 0);
@@ -58,6 +61,12 @@ namespace HiddenSearch
         bool fixStart = true;
         bool fixShift = false;
         double fadeTimer = 0;
+
+        //Double vis
+        int shareTime = 0;
+        int awayTime = 0;
+        bool shareStart = true;
+        double shareX, shareY;
 
         EyeXHost eyeXHost = new EyeXHost();
 
@@ -91,6 +100,18 @@ namespace HiddenSearch
                 Share_Status_Text.Text = "Sharing Data to\nIP:" + SenderIP.ToString();
                 Share_Status_Text.Visibility = Visibility.Visible;
                 communication_started_Sender = false;
+            }
+            setup();
+        }
+
+        private void setup() {
+            if (visualization != 0) {
+                otrack0.Visibility = Visibility.Hidden;
+                otrack1.Visibility = Visibility.Hidden;
+                otrackLine.Visibility = Visibility.Hidden;
+            }
+            if (visualization != 1) {
+                doubleHighlight.Visibility = Visibility.Hidden;
             }
         }
 
@@ -144,7 +165,7 @@ namespace HiddenSearch
                 ind_2 = received.IndexOf(":");
                 ind_3 = received.IndexOf("!");
                 ind_4 = received.IndexOf("(");
-                otherFastTrack.X = Convert.ToInt32(received.Substring(0, ind_1 - 1));
+                otherFastTrack.X = Convert.ToInt32(received.Substring(0, ind_1));
                 otherFastTrack.Y = Convert.ToInt32(received.Substring(ind_1 + 1, ind_2 - ind_1 - 1));
                 otherFixationTrack.X = Convert.ToInt32(received.Substring(ind_2 + 1, ind_3 - ind_2 - 1));
                 otherFixationTrack.Y = Convert.ToInt32(received.Substring(ind_3 + 1, ind_4 - ind_3 - 1));
@@ -188,6 +209,43 @@ namespace HiddenSearch
             Canvas.SetTop(track1, (fastTrack.Y - top) / 1.3 + top);
             trackLine.X2 = Canvas.GetLeft(track1) + 5;
             trackLine.Y2 = Canvas.GetTop(track1) + 5;
+
+            doubleTrack();
+        }
+
+
+
+        private void doubleTrack() {
+            double distance = Math.Sqrt(Math.Pow(fastTrack.X - otherFastTrack.X, 2) + Math.Pow(fastTrack.Y - otherFastTrack.Y, 2));
+            if (distance < 75)
+            {
+                shareX = (.7*shareX + .3*((fastTrack.X + otherFastTrack.X)/2));
+                shareY = (.7*shareY + .3*((fastTrack.Y + otherFastTrack.Y)/2));
+                shareTime++;
+                awayTime = 0;
+                doubleHighlight.Width += 25/shareTime;
+                doubleHighlight.Height += 25/shareTime;
+                Canvas.SetLeft(doubleHighlight, shareX - doubleHighlight.Width / 2);
+                Canvas.SetTop(doubleHighlight, shareY - doubleHighlight.Height / 2);
+                if (shareStart)
+                {
+                    shareX = (fastTrack.X + otherFastTrack.X) / 2;
+                    shareY = (fastTrack.Y + otherFastTrack.Y) / 2;
+                    Canvas.SetLeft(doubleHighlight, shareX - doubleHighlight.Width / 2);
+                    Canvas.SetTop(doubleHighlight, shareY - doubleHighlight.Height / 2);
+                    shareStart = false;
+                }
+            }
+            else
+            {
+                awayTime++;
+                if (awayTime > 10 | distance > 300) {
+                    doubleHighlight.Width = 0;
+                    doubleHighlight.Height = 0;
+                    shareTime = 0;
+                }
+                shareStart = true;
+            }
         }
 
         private void itemClicked(object sender, MouseButtonEventArgs e)
@@ -216,6 +274,12 @@ namespace HiddenSearch
                 Console.WriteLine(ex.ToString());
             }
             base.OnClosing(e);
+        }
+
+        private void bg_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            otherFastTrack.X = e.GetPosition(bg).X;
+            otherFastTrack.Y = e.GetPosition(bg).Y;
         }
 
         #region Sender/Receiver Methods

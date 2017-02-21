@@ -13,10 +13,11 @@
         <Ellipse Name="track0" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Fill="Purple" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
         <Ellipse Name="track1" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Fill="Black" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
         <Line Name="trackLine" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Stroke="Black" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="0"></Line>
-        <Ellipse Name="otrack0" Opacity="1" Panel.ZIndex="60" Fill="Red" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
-        <Ellipse Name="otrack1" Opacity="1" Panel.ZIndex="60" Fill="Black" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
-        <Line Name="otrackLine" Opacity="1" Panel.ZIndex="60" Stroke="Black" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="0"></Line>
-        <Rectangle Name="bg" Width="590" Height="890">
+        <Ellipse Name="otrack0" Visibility="Visible" Opacity="1" Panel.ZIndex="60" Fill="Red" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Ellipse Name="otrack1" Visibility="Visible" Opacity="1" Panel.ZIndex="60" Fill="Black" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Line Name="otrackLine" Visibility="Visible" Opacity="1" Panel.ZIndex="60" Stroke="Black" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="0"></Line>
+        <Ellipse Name="doubleHighlight" Visibility="Visible" Opacity=".7" Panel.ZIndex="60" StrokeThickness="5" Stroke="DarkBlue" Width="50" Height="50" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Rectangle Name="bg" Width="590" Height="890" PreviewMouseDown="bg_PreviewMouseDown">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="hiddenimage1.jpg"></ImageBrush>
             </Rectangle.Fill>
