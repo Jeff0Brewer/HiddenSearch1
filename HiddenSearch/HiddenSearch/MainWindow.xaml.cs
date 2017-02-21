@@ -34,7 +34,7 @@ namespace HiddenSearch
     {
         private bool SenderOn = true;
         private bool ReceiverOn = true;
-        private static int ReceiverPort = 11000, SenderPort = 11000;//ReceiverPort is the port used by Receiver, SenderPort is the port used by Sender
+        private static int ReceiverPort = 11000, SenderPort = 12000;//ReceiverPort is the port used by Receiver, SenderPort is the port used by Sender
         private bool communication_started_Receiver = false;//indicates whether the Receiver is ready to receive message(coordinates). Used for thread control
         private bool communication_started_Sender = false;//Indicate whether the program is sending its coordinates to others. Used for thread control
         private System.Threading.Thread communicateThread_Receiver; //Thread for receiver
@@ -47,7 +47,7 @@ namespace HiddenSearch
         private System.Windows.Threading.DispatcherTimer dispatcherTimer;
         private static String sending;
         private static String received;
-        private static string defaultSenderIP = "10.105.34.139";
+        private static string defaultSenderIP = "169.254.50.139";
         int ind_1, ind_2, ind_3, ind_4;
 
         Point fixationTrack = new Point(0, 0);
@@ -60,6 +60,18 @@ namespace HiddenSearch
         double fadeTimer = 0;
 
         EyeXHost eyeXHost = new EyeXHost();
+
+        //heatmap
+        SolidColorBrush brush = new SolidColorBrush();
+        Color orange = Color.FromArgb(255, 255, 128, 0);
+        Color yellow = Color.FromArgb(255, 255, 255, 0);
+        Color red = Color.FromArgb(255, 255, 0, 0);
+        double fixTime = 0;
+
+        int num_ellipses = 700;
+        int ellipse_count = 0;
+        Ellipse[] ellipses;
+        double ellipse_size = 80;
 
         public MainWindow()
         {
@@ -77,6 +89,8 @@ namespace HiddenSearch
             dispatcherTimer.Tick += new EventHandler(update);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
             dispatcherTimer.Start();
+
+            initializeHeatmap();
 
             if (ReceiverOn)
             {
@@ -106,6 +120,7 @@ namespace HiddenSearch
                 fixationTrack = new Point(e.X, e.Y);
                 fixShift = true;
                 fixStart = false;
+                fixTime = fixationtime;
             }
 
             if (e.EventType == FixationDataEventType.End)
@@ -144,7 +159,7 @@ namespace HiddenSearch
                 ind_2 = received.IndexOf(":");
                 ind_3 = received.IndexOf("!");
                 ind_4 = received.IndexOf("(");
-                otherFastTrack.X = Convert.ToInt32(received.Substring(0, ind_1 - 1));
+                otherFastTrack.X = Convert.ToInt32(received.Substring(0, ind_1)); // - 1));
                 otherFastTrack.Y = Convert.ToInt32(received.Substring(ind_1 + 1, ind_2 - ind_1 - 1));
                 otherFixationTrack.X = Convert.ToInt32(received.Substring(ind_2 + 1, ind_3 - ind_2 - 1));
                 otherFixationTrack.Y = Convert.ToInt32(received.Substring(ind_3 + 1, ind_4 - ind_3 - 1));
@@ -155,6 +170,8 @@ namespace HiddenSearch
                 Canvas.SetTop(otrack0, otherFixationTrack.Y);
                 otrackLine.X1 = otherFixationTrack.X + 5;
                 otrackLine.Y1 = otherFixationTrack.Y + 5;
+
+                //addPermColor(orange, otherFixationTrack.X, otherFixationTrack.Y, ellipse_size); //heatmap
 
                 otherFastTrack = PointFromScreen(otherFastTrack);
                 Canvas.SetLeft(otrack1,otherFastTrack.X);
@@ -176,7 +193,6 @@ namespace HiddenSearch
                 //trackLine.X2 = Canvas.GetLeft(track1) + 10;
                 //trackLine.Y2 = Canvas.GetTop(track1) + 10;
                 fixShift = false;
-
             }
             fastTrack = PointFromScreen(fastTrack);
             track0.Opacity = fadeTimer / 150;
@@ -188,7 +204,49 @@ namespace HiddenSearch
             Canvas.SetTop(track1, (fastTrack.Y - top) / 1.3 + top);
             trackLine.X2 = Canvas.GetLeft(track1) + 5;
             trackLine.Y2 = Canvas.GetTop(track1) + 5;
+
+            addPermColor(orange, left, top, ellipse_size);
+            //addColor(orange, left, top, ellipse_size);
         }
+
+        #region heatmap
+        private void addPermColor(Color color, double leftCoord, double topCoord, double size)
+        {
+            Ellipse fixEllipse = new Ellipse();
+            fixEllipse.Height = size;
+            fixEllipse.Width = size;
+            fixEllipse.Opacity = 0.01;
+            brush.Color = color;
+            fixEllipse.Fill = brush;
+            Canvas.SetLeft(fixEllipse, leftCoord - size / 2);
+            Canvas.SetTop(fixEllipse, topCoord - size / 2);
+            myCanvas.Children.Add(fixEllipse);
+        }
+        private void addColor(Color color, double leftCoord, double topCoord, double size)
+        {
+            if (ellipse_count >= num_ellipses) { ellipse_count = 0; }
+            brush.Color = color;
+            ellipses[ellipse_count].Visibility = Visibility.Visible;
+            Canvas.SetLeft(ellipses[ellipse_count], leftCoord - size / 2);
+            Canvas.SetTop(ellipses[ellipse_count], topCoord - size / 2);
+            ellipses[ellipse_count].Fill = brush;
+            ellipse_count++;
+        }
+        private void initializeHeatmap()
+        {
+            //after num_ellipses are set, it'll start replacing the oldest ellipses
+            ellipses = new Ellipse[num_ellipses];
+            for (int i = 0; i < num_ellipses; i++)
+            {
+                ellipses[i] = new Ellipse();
+                ellipses[i].Width = ellipse_size;
+                ellipses[i].Height = ellipse_size;
+                ellipses[i].Opacity = 0.01;
+                ellipses[i].Visibility = Visibility.Hidden;
+                myCanvas.Children.Add(ellipses[i]);
+            }
+        }
+        #endregion
 
         private void itemClicked(object sender, MouseButtonEventArgs e)
         {
