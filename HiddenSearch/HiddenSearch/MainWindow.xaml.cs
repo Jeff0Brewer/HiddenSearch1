@@ -53,6 +53,8 @@ namespace HiddenSearch
 
         int picture = 1; //0 for cats
 
+        EyeXHost eyeXHost;
+
         //Fixation vis
         Point fixationTrack = new Point(0, 0);
         Point fastTrack = new Point(0, 0);
@@ -69,7 +71,6 @@ namespace HiddenSearch
         bool shareStart = true;
         double shareX, shareY;
 
-        EyeXHost eyeXHost = new EyeXHost();
 
         //heatmap
         SolidColorBrush brush = new SolidColorBrush();
@@ -93,43 +94,61 @@ namespace HiddenSearch
             DataContext = this;
             InitializeComponent();
 
-            eyeXHost.Start();
-            //var gazeData = eyeXHost.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
-            var fixationData = eyeXHost.CreateFixationDataStream(FixationDataMode.Sensitive);
-            var gazeData = eyeXHost.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
-            fixationData.Next += fixTrack;
-            gazeData.Next += trackDot;
+            //setup();
 
-            dispatcherTimer = new System.Windows.Threading.DispatcherTimer(System.Windows.Threading.DispatcherPriority.Render);
-            dispatcherTimer.Tick += new EventHandler(update);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
-            dispatcherTimer.Start();
-
-            initializeHeatmap();
-
-            if (ReceiverOn)
+            if (picture == 1)
             {
-                IPHostEntry ipHostInfo = Dns.GetHostByName(Dns.GetHostName());
-                IPAddress ipAddress = ipHostInfo.AddressList[0];
-                Receive_Status_Text.Text = "Receiving Data at\nIP:" + ipAddress.ToString();
-                Receive_Status_Text.Visibility = Visibility.Visible;
+                Window1 window1 = new Window1();
+                window1.Show();
+                this.Close();
             }
-            if (SenderOn)
+            else
             {
-                SenderIP = defaultSenderIP;
-                Share_Status_Text.Text = "Sharing Data to\nIP:" + SenderIP.ToString();
-                Share_Status_Text.Visibility = Visibility.Visible;
-                communication_started_Sender = false;
+
+                eyeXHost = new EyeXHost();
+
+                eyeXHost.Start();
+                //var gazeData = eyeXHost.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
+                var fixationData = eyeXHost.CreateFixationDataStream(FixationDataMode.Sensitive);
+                var gazeData = eyeXHost.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
+                fixationData.Next += fixTrack;
+                gazeData.Next += trackDot;
+
+                dispatcherTimer = new System.Windows.Threading.DispatcherTimer(System.Windows.Threading.DispatcherPriority.Render);
+                dispatcherTimer.Tick += new EventHandler(update);
+                dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
+                dispatcherTimer.Start();
+
+                initializeHeatmap();
+
+                if (ReceiverOn)
+                {
+                    IPHostEntry ipHostInfo = Dns.GetHostByName(Dns.GetHostName());
+                    IPAddress ipAddress = ipHostInfo.AddressList[0];
+                    Receive_Status_Text.Text = "Receiving Data at\nIP:" + ipAddress.ToString();
+                    Receive_Status_Text.Visibility = Visibility.Visible;
+                }
+                if (SenderOn)
+                {
+                    SenderIP = defaultSenderIP;
+                    Share_Status_Text.Text = "Sharing Data to\nIP:" + SenderIP.ToString();
+                    Share_Status_Text.Visibility = Visibility.Visible;
+                    communication_started_Sender = false;
+                }
             }
-            setup();
         }
 
         private void setup()
         {
-            if (picture == 1) {
+            if (picture == 1)
+            {
                 Window1 window1 = new Window1();
                 window1.Show();
                 this.Close();
+            }
+            else {
+
+                eyeXHost = new EyeXHost();
             }
         }
 
@@ -378,7 +397,7 @@ namespace HiddenSearch
             ReceiverOn = false;
             communication_started_Receiver = false;
             communication_started_Sender = false;
-            dispatcherTimer.Stop();
+            //dispatcherTimer.Stop();
             try
             {
                 communicateThread_Receiver.Abort();

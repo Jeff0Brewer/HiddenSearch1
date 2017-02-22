@@ -5,8 +5,271 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HiddenSearch"
         mc:Ignorable="d"
-        Title="Window1" Height="300" Width="300">
-    <Grid>
-        
-    </Grid>
+        Title="Window1" Height="737.009" Width="1054.459" WindowState="Maximized">
+    <Canvas x:Name="mCanvas">
+        <TextBlock Panel.ZIndex="53" Name="Receive_Status_Text" Foreground="Black" Canvas.Right="30" Canvas.Top="30" MaxWidth="266.67" Text="Receiving Data" TextAlignment="Right" FontSize="18" HorizontalAlignment="Center" Visibility="Visible"/>
+        <TextBlock Panel.ZIndex="53" Name="Share_Status_Text" Foreground="Black" Canvas.Right="30" Canvas.Top="80" MaxWidth="266.67" Text="Sharing Data" TextAlignment="Right" FontSize="18" HorizontalAlignment="Center" Visibility="Visible"/>
+        <TextBlock Name="test" Canvas.Right="20" Canvas.Top="200" FontSize="15"></TextBlock>
+        <Ellipse Name="track0" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Fill="Purple" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Ellipse Name="track1" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Fill="Black" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Line Name="trackLine" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Stroke="Black" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="0"></Line>
+        <Ellipse Name="otrack0" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Fill="Red" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Ellipse Name="otrack1" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Fill="Black" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Line Name="otrackLine" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Stroke="Black" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="0"></Line>
+        <Ellipse Name="doubleHighlight" Visibility="Hidden" Opacity=".7" Panel.ZIndex="60" StrokeThickness="5" Stroke="DarkBlue" Width="50" Height="50" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Button x:Name="GazeButton"
+                Panel.ZIndex="800"
+                Content="Turn on Gazepath"
+                Canvas.Right="30"
+                Canvas.Top="130"
+                HorizontalAlignment="Center"
+                Margin="10,10,0,0"
+                VerticalAlignment="Top"
+                Width="75"
+                Click="gazeButton"/>
+        <Button x:Name="FixButton"
+                Panel.ZIndex="800"
+                Content="Turn on Fixation"
+                Canvas.Right="30"
+                Canvas.Top="160"
+                HorizontalAlignment="Center"
+                Margin="10,10,0,0"
+                VerticalAlignment="Top"
+                Visibility="Visible"
+                Click="fixButton"/>
+        <Button x:Name="HeatmapButton"
+                Panel.ZIndex="800"
+                Content="Turn on Heatmap"
+                Canvas.Right="30"
+                Canvas.Top="190"
+                HorizontalAlignment="Center"
+                Margin="10,10,0,0"
+                VerticalAlignment="Top"
+                Visibility="Visible"
+                Click="heatmapButton"/>
+        <Rectangle Name="bg" Width="560" Height="880">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="hiddenimage2.jpg"></ImageBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Name="key" Width="360" Height="700" Canvas.Left="680">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="answerkey2.jpg"></ImageBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Name="candle" Panel.ZIndex="800" Width="18" Height="88" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="454" Canvas.Top="606" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="14.941"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Name="envelope" Panel.ZIndex="800" Width="47" Height="26" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="292" Canvas.Top="421" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-12.375"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Name="scandle" Width="66" Height="104" Fill="Black" Opacity="0" Canvas.Left="882" Canvas.Top="249"/>
+        <Rectangle x:Name="senvelope" Width="69" Height="46" Fill="Black" Opacity="0" Canvas.Left="819" Canvas.Top="124"/>
+        <Rectangle x:Name="crayfish" Panel.ZIndex="800" Width="35" Height="96" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="51" Canvas.Top="21" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-6.775"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="scrayfish" Width="107" Height="73" Fill="Black" Opacity="0" Canvas.Left="899" Canvas.Top="590"/>
+        <Rectangle x:Name="saltshaker" Panel.ZIndex="800" Width="40" Height="42" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="400" Canvas.Top="645" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-31.53"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="ssaltshaker" Width="78" Height="62" Fill="Black" Opacity="0" Canvas.Left="699" Canvas.Top="434"/>
+        <Rectangle x:Name="moon" Panel.ZIndex="800" Width="78" Height="32" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="429" Canvas.Top="358" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="37.316"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="smoon" Width="55" Height="94" Fill="Black" Opacity="0" Canvas.Left="800" Canvas.Top="448"/>
+        <Rectangle x:Name="tulip" Panel.ZIndex="800" Width="32" Height="70" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="236" Canvas.Top="90"/>
+        <Rectangle x:Name="stulip" Width="54" Height="95" Fill="Black" Opacity="0" Canvas.Left="699" Canvas.Top="222"/>
+        <Rectangle x:Name="needle" Panel.ZIndex="800" Width="6" Height="95" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="79" Canvas.Top="389"/>
+        <Rectangle x:Name="sneedle" Width="101" Height="25" Fill="Black" Opacity="0" Canvas.Left="787" Canvas.Top="211"/>
+        <Rectangle x:Name="butterfly" Panel.ZIndex="800" Width="39" Height="30" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="312" Canvas.Top="630" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-11.443"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="sbutterfly" Width="74" Height="65" Fill="Black" Opacity="0" Canvas.Left="802" Canvas.Top="582"/>
+        <Rectangle x:Name="cap" Panel.ZIndex="800" Width="74" Height="50" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="132" Canvas.Top="434"/>
+        <Rectangle x:Name="scap" Width="78" Height="64" Fill="Black" Opacity="0" Canvas.Left="690" Canvas.Top="30"/>
+        <Rectangle x:Name="pear" Panel.ZIndex="800" Width="36" Height="24" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="486" Canvas.Top="67" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-31.13"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="spear" Width="47" Height="62" Fill="Black" Opacity="0" Canvas.Left="706" Canvas.Top="343"/>
+        <Rectangle x:Name="mushroom" Panel.ZIndex="800" Width="33" Height="20" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="270" Canvas.Top="44" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="45.204"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="smushroom" Width="71" Height="62" Fill="Black" Opacity="0" Canvas.Left="706" Canvas.Top="531"/>
+        <Rectangle x:Name="badmintonbirdie" Panel.ZIndex="800" Width="45" Height="32" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="266" Canvas.Top="336" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="11.383"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="sbadmintonbirdie" Width="76" Height="84" Fill="Black" Opacity="0" Canvas.Left="800" Canvas.Top="10"/>
+        <Rectangle x:Name="boot" Panel.ZIndex="800" Width="54" Height="62" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="450" Canvas.Top="215" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="36.747"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="sboot" Width="65" Height="74" Fill="Black" Opacity="0" Canvas.Left="941" Canvas.Top="20"/>
+        <Rectangle x:Name="arrow" Panel.ZIndex="800" Width="105" Height="20" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="65" Canvas.Top="291" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-55.294"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="sarrow" Width="121" Height="33" Fill="Black" Opacity="0" Canvas.Left="787" Canvas.Top="391"/>
+        <Rectangle x:Name="heart" Panel.ZIndex="800" Width="18" Height="26" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="375" Canvas.Top="307" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="37.737"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="sheart" Width="49" Height="51" Fill="Black" Opacity="0" Canvas.Left="955" Canvas.Top="193"/>
+        <Rectangle x:Name="tepee" Panel.ZIndex="800" Width="54" Height="62" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="414" Canvas.Top="164" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="36.747"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="stepee" Width="72" Height="95" Fill="Black" Opacity="0" Canvas.Left="791" Canvas.Top="258"/>
+        <Rectangle x:Name="elfshoe" Panel.ZIndex="800" Width="58" Height="26" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="30" Canvas.Top="237" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-39.92"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="selfshoe" Width="69" Height="46" Fill="Black" Opacity="0" Canvas.Left="718" Canvas.Top="129"/>
+        <Rectangle x:Name="nail1" Panel.ZIndex="800" Width="61" Height="20" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="275" Canvas.Top="376" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-25.875"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="snail1" Width="23" Height="68" Fill="Black" Opacity="0" Canvas.Left="919" Canvas.Top="470" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-15.246"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="nail2" Panel.ZIndex="800" Width="34" Height="17" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="357" Canvas.Top="575" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-73.804"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="snail2" Width="23" Height="48" Fill="Black" Opacity="0" Canvas.Left="900" Canvas.Top="497" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-15.246"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="bird" Panel.ZIndex="800" Width="44" Height="72" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="274" Canvas.Top="164"/>
+        <Rectangle x:Name="sbird" Width="71" Height="82" Fill="Black" Opacity="0" Canvas.Left="952" Canvas.Top="372"/>
+        <Rectangle x:Name="match" Panel.ZIndex="800" Width="13" Height="57" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="132" Canvas.Top="604" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="21.394"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="smatch" Width="69" Height="61" Fill="Black" Opacity="0" Canvas.Left="899" Canvas.Top="109"/>
+
+    </Canvas>
 </Window>
