@@ -47,7 +47,7 @@ namespace HiddenSearch
         private System.Windows.Threading.DispatcherTimer dispatcherTimer;
         private static String sending;
         private static String received;
-        private static string defaultSenderIP = "169.254.50.139";
+        private static string defaultSenderIP = "169.254.41.115";
 
         int ind_1, ind_2, ind_3, ind_4;
 
@@ -356,7 +356,7 @@ namespace HiddenSearch
             else
             {
                 awayTime++;
-                if (awayTime > 10 | distance > 300) {
+                if (awayTime > 10) {
                     doubleHighlight.Width = 0;
                     doubleHighlight.Height = 0;
                     shareTime = 0;

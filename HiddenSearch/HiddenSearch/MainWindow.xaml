@@ -18,7 +18,7 @@
         <Line Name="otrackLine" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Stroke="Black" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="0"></Line>
         <Ellipse Name="doubleHighlight" Visibility="Hidden" Opacity=".7" Panel.ZIndex="60" StrokeThickness="5" Stroke="DarkBlue" Width="50" Height="50" Canvas.Left="0" Canvas.Top="0"></Ellipse>
         <Button x:Name="GazeButton"
-                Panel.ZIndex="57"
+                Panel.ZIndex="800"
                 Content="Turn on Gazepath"
                 Canvas.Right="30"
                 Canvas.Top="130"
@@ -28,7 +28,7 @@
                 Width="75"
                 Click="gazeButton"/>
         <Button x:Name="FixButton"
-                Panel.ZIndex="57"
+                Panel.ZIndex="800"
                 Content="Turn on Fixation"
                 Canvas.Right="30"
                 Canvas.Top="160"
@@ -38,7 +38,7 @@
                 Visibility="Visible"
                 Click="fixButton"/>
         <Button x:Name="HeatmapButton"
-                Panel.ZIndex="57"
+                Panel.ZIndex="800"
                 Content="Turn on Heatmap"
                 Canvas.Right="30"
                 Canvas.Top="190"
@@ -58,7 +58,7 @@
                 <ImageBrush ImageSource="answerkey.jpg"></ImageBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Rectangle Name="hat" Width="78" Height="26" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="405" Canvas.Top="137"></Rectangle>
+        <Rectangle Name="hat" Panel.ZIndex="800" Width="78" Height="26" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="405" Canvas.Top="137"></Rectangle>
         <Rectangle Name="candycane" Panel.ZIndex="800" Width="73" Height="29" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="304" Canvas.Top="114" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
