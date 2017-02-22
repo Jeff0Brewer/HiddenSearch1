@@ -1,0 +1,6 @@
+C:\Users\Master\Documents\GitHub\HiddenSearch1\HiddenSearch\HiddenSearch\EyeXFramework\bin\Debug\EyeXFramework.dll
+C:\Users\Master\Documents\GitHub\HiddenSearch1\HiddenSearch\HiddenSearch\EyeXFramework\bin\Debug\EyeXFramework.pdb
+C:\Users\Master\Documents\GitHub\HiddenSearch1\HiddenSearch\HiddenSearch\EyeXFramework\bin\Debug\Tobii.EyeX.Client.Net20.dll
+C:\Users\Master\Documents\GitHub\HiddenSearch1\HiddenSearch\HiddenSearch\EyeXFramework\obj\Debug\EyeXFramework.csprojResolveAssemblyReference.cache
+C:\Users\Master\Documents\GitHub\HiddenSearch1\HiddenSearch\HiddenSearch\EyeXFramework\obj\Debug\EyeXFramework.dll
+C:\Users\Master\Documents\GitHub\HiddenSearch1\HiddenSearch\HiddenSearch\EyeXFramework\obj\Debug\EyeXFramework.pdb

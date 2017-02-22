@@ -51,7 +51,7 @@ namespace HiddenSearch
 
         int ind_1, ind_2, ind_3, ind_4;
 
-        int picture = 1; //0 for cats
+        int picture = 2; //0 for cats
 
         //Fixation vis
         Point fixationTrack = new Point(0, 0);
@@ -129,6 +129,12 @@ namespace HiddenSearch
             if (picture == 1) {
                 Window1 window1 = new Window1();
                 window1.Show();
+                this.Close();
+            }
+            else if (picture == 2)
+            {
+                Window2 window2 = new Window2();
+                window2.Show();
                 this.Close();
             }
         }

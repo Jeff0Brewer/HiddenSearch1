@@ -1,0 +1,162 @@
+﻿<Window x:Class="HiddenSearch.Window2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HiddenSearch"
+        mc:Ignorable="d"
+        Title="Window2" Height="900" Width="1200">
+    <Canvas x:Name="myCanvas">
+        <TextBlock Panel.ZIndex="53" Name="Receive_Status_Text" Foreground="Black" Canvas.Right="30" Canvas.Top="30" MaxWidth="266.67" Text="Receiving Data" TextAlignment="Right" FontSize="18" HorizontalAlignment="Center" Visibility="Visible"/>
+        <TextBlock Panel.ZIndex="53" Name="Share_Status_Text" Foreground="Black" Canvas.Right="30" Canvas.Top="80" MaxWidth="266.67" Text="Sharing Data" TextAlignment="Right" FontSize="18" HorizontalAlignment="Center" Visibility="Visible"/>
+        <TextBlock Name="test" Canvas.Right="20" Canvas.Top="200" FontSize="15"></TextBlock>
+        <Ellipse Name="track0" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Fill="Purple" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Ellipse Name="track1" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Fill="Black" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Line Name="trackLine" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Stroke="Black" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="0"></Line>
+        <Ellipse Name="otrack0" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Fill="Red" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Ellipse Name="otrack1" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Fill="Black" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Line Name="otrackLine" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Stroke="Black" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="0"></Line>
+        <Ellipse Name="doubleHighlight" Visibility="Hidden" Opacity="0" Panel.ZIndex="60" StrokeThickness="5" Stroke="DarkBlue" Width="50" Height="50" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Button x:Name="GazeButton"
+                Panel.ZIndex="800"
+                Content="Turn on Gazepath"
+                Canvas.Right="30"
+                Canvas.Top="130"
+                HorizontalAlignment="Center"
+                Margin="10,10,0,0"
+                VerticalAlignment="Top"
+                Width="75"
+                Click="gazeButton"/>
+        <Button x:Name="FixButton"
+                Panel.ZIndex="800"
+                Content="Turn on Fixation"
+                Canvas.Right="30"
+                Canvas.Top="160"
+                HorizontalAlignment="Center"
+                Margin="10,10,0,0"
+                VerticalAlignment="Top"
+                Visibility="Visible"
+                Click="fixButton"/>
+        <Button x:Name="HeatmapButton"
+                Panel.ZIndex="800"
+                Content="Turn on Heatmap"
+                Canvas.Right="30"
+                Canvas.Top="190"
+                HorizontalAlignment="Center"
+                Margin="10,10,0,0"
+                VerticalAlignment="Top"
+                Visibility="Visible"
+                Click="heatmapButton"/>
+
+        <Rectangle Name="bg" Width="700" Height="890" PreviewMouseDown="bg_PreviewMouseDown">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="Hiddenimage3.jpg"></ImageBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Name="key" Width="360" Height="700" Canvas.Left="680">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="answerkey3.jpg"></ImageBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        
+        <Rectangle Name="sock" Panel.ZIndex="800" Width="90" Height="62" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="419" Canvas.Top="79"></Rectangle>
+        <Rectangle x:Name="balloon" Panel.ZIndex="800" Width="90" Height="42" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="564" Canvas.Top="473" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-13.111"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="bandaid" Panel.ZIndex="800" Width="97" Height="26" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="246" Canvas.Top="379"/>
+        <Rectangle x:Name="seal" Panel.ZIndex="800" Width="90" Height="62" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="568" Canvas.Top="590"/>
+        <Rectangle x:Name="pumpkin" Panel.ZIndex="800" Width="71" Height="71" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="348" Canvas.Top="170"/>
+        <Rectangle x:Name="bell" Panel.ZIndex="800" Width="37" Height="35" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="65" Canvas.Top="522"/>
+        <Rectangle x:Name="cat" Panel.ZIndex="800" Width="37" Height="172" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="608" Canvas.Top="209" RenderTransformOrigin="2.348,2.53"/>
+        <Rectangle x:Name="toothbrush" Panel.ZIndex="800" Width="90" Height="20" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="206" Canvas.Top="576" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-38.654"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="candle" Panel.ZIndex="800" Width="57" Height="26" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="362" Canvas.Top="53"/>
+        <Rectangle x:Name="crayfish" Panel.ZIndex="800" Width="38" Height="159" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="546" Canvas.Top="123"/>
+        <Rectangle x:Name="fish" Panel.ZIndex="800" Width="32" Height="123" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="89" Canvas.Top="54" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="30.388"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="bird1" Panel.ZIndex="800" Width="83" Height="41" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="307" Canvas.Top="317" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="48.833"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="bird2" Panel.ZIndex="800" Width="33" Height="97" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="587" Canvas.Top="32"/>
+        <Rectangle x:Name="worm1" Panel.ZIndex="800" Width="166" Height="38" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="141" Canvas.Top="-50" RenderTransformOrigin="-2.24,3.982">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="49.331"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="worm2" Panel.ZIndex="800" Width="69" Height="36" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="121" Canvas.Top="616"/>
+        <Rectangle x:Name="worm3" Panel.ZIndex="800" Width="18" Height="62" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="41" Canvas.Top="108" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-29.008"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="worm4" Panel.ZIndex="800" Width="23" Height="101" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="85" Canvas.Top="132" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="39.351"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+
+        <Rectangle Name="ssock" Width="52" Height="92" Fill="Black" Opacity="0" Canvas.Left="857" Canvas.Top="130"/>
+        <Rectangle x:Name="scandle" Width="89" Height="92" Fill="Black" Opacity="0" Canvas.Left="951" Canvas.Top="123"/>
+        <Rectangle x:Name="sbandaid" Width="108" Height="49" Fill="Black" Opacity="0" Canvas.Left="888" Canvas.Top="30"/>
+        <Rectangle x:Name="scrayfish" Width="148" Height="92" Fill="Black" Opacity="0" Canvas.Left="695" Canvas.Top="16"/>
+        <Rectangle x:Name="sbell" Width="69" Height="50" Fill="Black" Opacity="0" Canvas.Left="700" Canvas.Top="140"/>
+        <Rectangle x:Name="sseal" Width="113" Height="92" Fill="Black" Opacity="0" Canvas.Left="717" Canvas.Top="241"/>
+        <Rectangle x:Name="spumpkin" Width="106" Height="92" Fill="Black" Opacity="0" Canvas.Left="904" Canvas.Top="241"/>
+        <Rectangle x:Name="scat" Width="173" Height="51" Fill="Black" Opacity="0" Canvas.Left="751" Canvas.Top="354"/>
+        <Rectangle x:Name="sballoon" Width="66" Height="105" Fill="Black" Opacity="0" Canvas.Left="958" Canvas.Top="352"/>
+        <Rectangle x:Name="stoothbrush" Width="108" Height="63" Fill="Black" Opacity="0" Canvas.Left="916" Canvas.Top="481"/>
+        <Rectangle x:Name="sfish" Width="125" Height="62" Fill="Black" Opacity="0" Canvas.Left="705" Canvas.Top="590"/>
+        <Rectangle x:Name="sbird1" Width="86" Height="64" Fill="Black" Opacity="0" Canvas.Left="869" Canvas.Top="590"/>
+        <Rectangle x:Name="sbird2" Width="92" Height="38" Fill="Black" Opacity="0" Canvas.Left="932" Canvas.Top="582"/>
+        <Rectangle x:Name="sworm1" Width="73" Height="92" Fill="Black" Opacity="0" Canvas.Left="807" Canvas.Top="431"/>
+        <Rectangle x:Name="sworm2" Width="90" Height="25" Fill="Black" Opacity="0" Canvas.Left="717" Canvas.Top="449"/>
+        <Rectangle x:Name="sworm3" Width="62" Height="23" Fill="Black" Opacity="0" Canvas.Left="691" Canvas.Top="500"/>
+        <Rectangle x:Name="sworm4" Width="102" Height="25" Fill="Black" Opacity="0" Canvas.Left="705" Canvas.Top="474"/>
+
+    </Canvas>
+</Window>
