@@ -51,7 +51,7 @@ namespace HiddenSearch
 
         int ind_1, ind_2, ind_3, ind_4;
 
-        int visualization = 1; //0 for fixation, 1 for double, 2 for heatmap
+        int picture = 1; //0 for cats
 
         //Fixation vis
         Point fixationTrack = new Point(0, 0);
@@ -121,17 +121,15 @@ namespace HiddenSearch
                 Share_Status_Text.Visibility = Visibility.Visible;
                 communication_started_Sender = false;
             }
-            //setup();
+            setup();
         }
 
-        private void setup() {
-            if (visualization != 0) {
-                otrack0.Visibility = Visibility.Hidden;
-                otrack1.Visibility = Visibility.Hidden;
-                otrackLine.Visibility = Visibility.Hidden;
-            }
-            if (visualization != 1) {
-                doubleHighlight.Visibility = Visibility.Hidden;
+        private void setup()
+        {
+            if (picture == 1) {
+                Window1 window1 = new Window1();
+                window1.Show();
+                this.Close();
             }
         }
 
