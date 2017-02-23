@@ -51,6 +51,10 @@ namespace HiddenSearch
         private static string defaultSenderIP = "169.254.41.115";
 
         int ind_1, ind_2, ind_3, ind_4;
+        int stage = 0;
+        bool together = false;
+        double t0, t1, t2, t3;
+        int time1, time2, time3;
 
         int picture = 0; //0 for cats, 1 for bugs, 2 for mice
 
@@ -150,7 +154,37 @@ namespace HiddenSearch
                     Share_Status_Text.Visibility = Visibility.Visible;
                     communication_started_Sender = false;
                 }
+                setup();
             }
+        }
+
+        private void setup() {
+            Rectangle test = new Rectangle();
+            foreach (UIElement child in myCanvas.Children) {
+                if (Equals(child.GetType(), test.GetType())) {
+                    child.Visibility = Visibility.Hidden;
+                }
+            }
+            bg.Visibility = Visibility.Visible;
+            key.Visibility = Visibility.Visible;
+            if (together)
+            {
+                nextHighlight(System.Windows.Media.Colors.Purple, "mouse");
+            }
+            else {
+                nextHighlight(System.Windows.Media.Colors.Red, "carrot");
+                nextHighlight(System.Windows.Media.Colors.Blue, "candycane");
+            }
+            t0 = DateTime.Now.TimeOfDay.TotalSeconds;
+        }
+
+        private void nextHighlight(System.Windows.Media.Color color, String name) {
+            Rectangle hitem = FindName(name) as Rectangle;
+            Rectangle hkey = FindName("s" + name) as Rectangle;
+            hkey.Visibility = Visibility.Visible;
+            hitem.Visibility = Visibility.Visible;
+            hkey.Fill = new SolidColorBrush(color);
+            hkey.Opacity = .5;
         }
         private void initLog()
         {
@@ -366,8 +400,7 @@ namespace HiddenSearch
             }
         }
         #endregion
-
-
+        
         private void doubleTrack() {
             double distance = Math.Sqrt(Math.Pow(fastTrack.X - otherFastTrack.X, 2) + Math.Pow(fastTrack.Y - otherFastTrack.Y, 2));
             if (distance < 125)
@@ -400,13 +433,91 @@ namespace HiddenSearch
                 shareStart = true;
             }
         }
+        
 
         private void itemClicked(object sender, MouseButtonEventArgs e)
         {
             Rectangle box = sender as Rectangle;
             Rectangle key = FindName("s" + box.Name) as Rectangle;
+            key.Fill = new SolidColorBrush(System.Windows.Media.Colors.Black);
             box.Opacity = .5;
             key.Opacity = .8;
+            if (together)
+            {
+                if (stage == 0 && box.Name.CompareTo("mouse") == 0)
+                {
+                    stage++;
+                    nextHighlight(System.Windows.Media.Colors.Purple, "pear");
+                    t1 = DateTime.Now.TimeOfDay.TotalSeconds;
+                }
+                else if (stage == 1 && box.Name.CompareTo("pear") == 0)
+                {
+                    stage++;
+                    nextHighlight(System.Windows.Media.Colors.Purple, "cone");
+                    t2 = DateTime.Now.TimeOfDay.TotalSeconds;
+                }
+                else if (stage == 2 && box.Name.CompareTo("cone") == 0) {
+                    stage++;
+                    t3 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    time1 = (int)(t1 - t0);
+                    time2 = (int)(t2 - t1);
+                    time3 = (int)(t3 - t2);
+                    test.Text = time1.ToString() + " " + time2.ToString() + " " + time3.ToString();
+                }
+            }
+            else {
+                if (stage == 0)
+                {
+                    if (box.Name.CompareTo("carrot") == 0)
+                    {
+                        stage++;
+                        nextHighlight(System.Windows.Media.Colors.Red, "fish");
+                        t1 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    }
+                    else if (box.Name.CompareTo("candycane") == 0)
+                    {
+                        stage++;
+                        nextHighlight(System.Windows.Media.Colors.Blue, "shoe");
+                        t1 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    }
+                }
+                else if (stage == 1)
+                {
+                    if (box.Name.CompareTo("fish") == 0)
+                    {
+                        stage++;
+                        nextHighlight(System.Windows.Media.Colors.Red, "pencil");
+                        t2 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    }
+                    else if (box.Name.CompareTo("shoe") == 0)
+                    {
+                        stage++;
+                        nextHighlight(System.Windows.Media.Colors.Blue, "mushroom");
+                        t2 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    }
+                }
+                else if (stage == 2) {
+                    if (box.Name.CompareTo("pencil") == 0)
+                    {
+                        stage++;
+                        t3 = DateTime.Now.TimeOfDay.TotalSeconds;
+                        time1 = (int)(t1 - t0);
+                        time2 = (int)(t2 - t1);
+                        time3 = (int)(t3 - t2);
+                        test.Text = time1.ToString() + " " + time2.ToString() + " " + time3.ToString();
+                    }
+                    else if (box.Name.CompareTo("mushroom") == 0)
+                    {
+                        stage++;
+                        t3 = DateTime.Now.TimeOfDay.TotalSeconds;
+                        time1 = (int)(t1 - t0);
+                        time2 = (int)(t2 - t1);
+                        time3 = (int)(t3 - t2);
+                        test.Text = time1.ToString() + " " + time2.ToString() + " " + time3.ToString();
+                    }
+                }
+            }
+            
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
