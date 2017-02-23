@@ -32,6 +32,9 @@ namespace HiddenSearch
     public partial class Window2 : Window
     {
         #region Variables
+        bool together = true;
+
+
         private bool SenderOn = true;
         private bool ReceiverOn = true;
         private static int ReceiverPort = 11000, SenderPort = 11000;//ReceiverPort is the port used by Receiver, SenderPort is the port used by Sender
@@ -52,7 +55,6 @@ namespace HiddenSearch
         int ind_1, ind_2, ind_3, ind_4;
 
         int stage = 0;
-        bool together = true;
         double t0, t1, t2, t3;
         int time1, time2, time3;
 

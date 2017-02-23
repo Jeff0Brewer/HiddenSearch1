@@ -33,6 +33,11 @@ namespace HiddenSearch
     public partial class MainWindow : Window
     {
         #region Variables
+        private static string defaultSenderIP = "169.254.50.139"; //169.254.41.115, 169.254.50.139
+        string compID = "A";
+        bool together = false; //Are partners working together on this image?
+
+
         private bool SenderOn = true;
         private bool ReceiverOn = true;
         private static int ReceiverPort = 11000, SenderPort = 11000;//ReceiverPort is the port used by Receiver, SenderPort is the port used by Sender
@@ -48,10 +53,6 @@ namespace HiddenSearch
         private System.Windows.Threading.DispatcherTimer dispatcherTimer;
         private static String sending;
         private static String received;
-        private static string defaultSenderIP = "169.254.41.115";
-
-        bool together = false; //Are partners working together on this image?
-
 
         int ind_1, ind_2, ind_3, ind_4;
         int stage = 0;
@@ -59,7 +60,6 @@ namespace HiddenSearch
         int time1, time2, time3;
 
         EyeXHost eyeXHost;
-
 
         //Fixation vis
         Point fixationTrack = new Point(0, 0);
@@ -76,7 +76,6 @@ namespace HiddenSearch
         int awayTime = 0;
         bool shareStart = true;
         double shareX, shareY;
-
 
         //heatmap
         SolidColorBrush brush = new SolidColorBrush();
@@ -97,12 +96,10 @@ namespace HiddenSearch
         int wrongClicks = 0;
 
         //log
-        string compID = "A";
         string pathfolder = "C:/Users/master/Documents/Github/HiddenSearch/gamelog/";
         string path;
         string time;
         string datapoint;
-        string trialNum = "0";
         #endregion
 
         public MainWindow()
@@ -176,7 +173,7 @@ namespace HiddenSearch
         }
         private void initLog()
         {
-            path = pathfolder + compID + "_" + DateTime.Now.ToString("MM-dd_hh-mm") + trialNum + ".txt";
+            path = pathfolder + compID + "_" + DateTime.Now.ToString("MM-dd_hh-mm") + ".txt";
         }
         private void logTime(int timeIn)
         {
