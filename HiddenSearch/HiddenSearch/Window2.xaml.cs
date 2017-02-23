@@ -92,12 +92,21 @@ namespace HiddenSearch
         bool heatmapSetting = false;
 
         int wrongClicks = 0;
+
+        string path;
+        string time;
+        string datapoint;
+        string compID;
         #endregion
 
-        public Window2()
+        public Window2(string opath, string id, string ip)
         {
             DataContext = this;
             InitializeComponent();
+
+            path = opath;
+            compID = id;
+            defaultSenderIP = ip;
 
             eyeXHost.Start();
             //var gazeData = eyeXHost.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
@@ -162,6 +171,15 @@ namespace HiddenSearch
             hitem.Visibility = Visibility.Visible;
             hkey.Fill = new SolidColorBrush(color);
             hkey.Opacity = .5;
+        }
+
+        private void logTime(int timeIn)
+        {
+            time = DateTime.Now.ToString("hh:mm:ss.ff");
+            datapoint = "Img2: " + compID + " @ " + time + "::" + timeIn.ToString() + "\n";
+            System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
+            file.WriteLine(datapoint);
+            file.Close();
         }
 
         #region buttons
@@ -411,20 +429,22 @@ namespace HiddenSearch
                     stage++;
                     nextHighlight(System.Windows.Media.Colors.Purple, "seal");
                     t1 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    time1 = (int)(t1 - t0);
+                    logTime(time1);
                 }
                 else if (stage == 1 && box.Name.CompareTo("seal") == 0)
                 {
                     stage++;
                     nextHighlight(System.Windows.Media.Colors.Purple, "cat");
                     t2 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    time2 = (int)(t2 - t1);
+                    logTime(time2);
                 }
                 else if (stage == 2 && box.Name.CompareTo("cat") == 0) {
                     stage++;
                     t3 = DateTime.Now.TimeOfDay.TotalSeconds;
-                    time1 = (int)(t1 - t0);
-                    time2 = (int)(t2 - t1);
                     time3 = (int)(t3 - t2);
-                    test.Text = time1.ToString() + " " + time2.ToString() + " " + time3.ToString();
+                    logTime(time3);
                 }
             }
             else
@@ -436,12 +456,16 @@ namespace HiddenSearch
                         stage++;
                         nextHighlight(System.Windows.Media.Colors.Red, "crayfish");
                         t1 = DateTime.Now.TimeOfDay.TotalSeconds;
+                        time1 = (int)(t1 - t0);
+                        logTime(time1);
                     }
                     else if (box.Name.CompareTo("pumpkin") == 0)
                     {
                         stage++;
                         nextHighlight(System.Windows.Media.Colors.Blue, "sock");
                         t1 = DateTime.Now.TimeOfDay.TotalSeconds;
+                        time1 = (int)(t1 - t0);
+                        logTime(time1);
                     }
                 }
                 else if (stage == 1)
@@ -451,12 +475,16 @@ namespace HiddenSearch
                         stage++;
                         nextHighlight(System.Windows.Media.Colors.Red, "toothbrush");
                         t2 = DateTime.Now.TimeOfDay.TotalSeconds;
+                        time2 = (int)(t2 - t1);
+                        logTime(time2);
                     }
                     else if (box.Name.CompareTo("sock") == 0)
                     {
                         stage++;
                         nextHighlight(System.Windows.Media.Colors.Blue, "bell");
                         t2 = DateTime.Now.TimeOfDay.TotalSeconds;
+                        time2 = (int)(t2 - t1);
+                        logTime(time2);
                     }
                 }
                 else if (stage == 2) {
@@ -464,19 +492,15 @@ namespace HiddenSearch
                     {
                         stage++;
                         t3 = DateTime.Now.TimeOfDay.TotalSeconds;
-                        time1 = (int)(t1 - t0);
-                        time2 = (int)(t2 - t1);
                         time3 = (int)(t3 - t2);
-                        test.Text = time1.ToString() + " " + time2.ToString() + " " + time3.ToString();
+                        logTime(time3);
                     }
                     else if (box.Name.CompareTo("bell") == 0)
                     {
                         stage++;
                         t3 = DateTime.Now.TimeOfDay.TotalSeconds;
-                        time1 = (int)(t1 - t0);
-                        time2 = (int)(t2 - t1);
                         time3 = (int)(t3 - t2);
-                        test.Text = time1.ToString() + " " + time2.ToString() + " " + time3.ToString();
+                        logTime(time3);
                     }
                 }
             }

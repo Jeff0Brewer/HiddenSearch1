@@ -15,7 +15,7 @@ namespace MinimalGazeDataStream
         {
             // SET THESE FOR THIS COMPUTER //
             string compID = "A";
-            string path = "C:/Users/Master/Documents/GitHub/HiddenSearch1/gazelog/" + compID + "_" + DateTime.Now.ToString("MM-dd_hh-mm") + ".txt";
+            string path = "C:/Users/Master/Documents/GitHub/HiddenSearch/gazelog/" + compID + "_" + DateTime.Now.ToString("MM-dd_hh-mm") + ".txt";
             //
             string datapoint;
             string time;

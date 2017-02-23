@@ -50,15 +50,16 @@ namespace HiddenSearch
         private static String received;
         private static string defaultSenderIP = "169.254.41.115";
 
+        bool together = false; //Are partners working together on this image?
+
+
         int ind_1, ind_2, ind_3, ind_4;
         int stage = 0;
-        bool together = false;
         double t0, t1, t2, t3;
         int time1, time2, time3;
 
-        int picture = 0; //0 for cats, 1 for bugs, 2 for mice
-
         EyeXHost eyeXHost;
+
 
         //Fixation vis
         Point fixationTrack = new Point(0, 0);
@@ -98,7 +99,7 @@ namespace HiddenSearch
 
         //log
         string compID = "A";
-        string pathfolder = "C:/Users/Master/Documents/Github/HiddenSearch1/gamelog/";
+        string pathfolder = "C:/Users/master/Documents/Github/HiddenSearch/gamelog/";
         string path;
         string time;
         string datapoint;
@@ -110,52 +111,40 @@ namespace HiddenSearch
             DataContext = this;
             InitializeComponent();
 
-            if (picture == 1)
+            eyeXHost = new EyeXHost();
+
+            initLog();
+
+            eyeXHost.Start();
+            //var gazeData = eyeXHost.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
+            var fixationData = eyeXHost.CreateFixationDataStream(FixationDataMode.Sensitive);
+            var gazeData = eyeXHost.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
+            fixationData.Next += fixTrack;
+            gazeData.Next += trackDot;
+
+            dispatcherTimer = new System.Windows.Threading.DispatcherTimer(System.Windows.Threading.DispatcherPriority.Render);
+            dispatcherTimer.Tick += new EventHandler(update);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
+            dispatcherTimer.Start();
+
+            initializeHeatmap();
+
+            if (ReceiverOn)
             {
-                Window1 window1 = new Window1();
-                window1.Show();
-                this.Close();
+                IPHostEntry ipHostInfo = Dns.GetHostByName(Dns.GetHostName());
+                IPAddress ipAddress = ipHostInfo.AddressList[0];
+                Receive_Status_Text.Text = "Receiving Data at\nIP:" + ipAddress.ToString();
+                Receive_Status_Text.Visibility = Visibility.Visible;
             }
-            else if (picture == 2)
+            if (SenderOn)
             {
-                Window2 window2 = new Window2();
-                window2.Show();
-                this.Close();
+                SenderIP = defaultSenderIP;
+                Share_Status_Text.Text = "Sharing Data to\nIP:" + SenderIP.ToString();
+                Share_Status_Text.Visibility = Visibility.Visible;
+                communication_started_Sender = false;
             }
-            else
-            {
-                eyeXHost = new EyeXHost();
-
-                eyeXHost.Start();
-                //var gazeData = eyeXHost.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
-                var fixationData = eyeXHost.CreateFixationDataStream(FixationDataMode.Sensitive);
-                var gazeData = eyeXHost.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
-                fixationData.Next += fixTrack;
-                gazeData.Next += trackDot;
-
-                dispatcherTimer = new System.Windows.Threading.DispatcherTimer(System.Windows.Threading.DispatcherPriority.Render);
-                dispatcherTimer.Tick += new EventHandler(update);
-                dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
-                dispatcherTimer.Start();
-
-                initializeHeatmap();
-
-                if (ReceiverOn)
-                {
-                    IPHostEntry ipHostInfo = Dns.GetHostByName(Dns.GetHostName());
-                    IPAddress ipAddress = ipHostInfo.AddressList[0];
-                    Receive_Status_Text.Text = "Receiving Data at\nIP:" + ipAddress.ToString();
-                    Receive_Status_Text.Visibility = Visibility.Visible;
-                }
-                if (SenderOn)
-                {
-                    SenderIP = defaultSenderIP;
-                    Share_Status_Text.Text = "Sharing Data to\nIP:" + SenderIP.ToString();
-                    Share_Status_Text.Visibility = Visibility.Visible;
-                    communication_started_Sender = false;
-                }
-                setup();
-            }
+            setup();
+            
         }
 
         private void setup() {
@@ -188,12 +177,12 @@ namespace HiddenSearch
         }
         private void initLog()
         {
-            path = pathfolder + compID + "_" + DateTime.Now.ToString("MM-dd_") + trialNum + ".txt";
+            path = pathfolder + compID + "_" + DateTime.Now.ToString("MM-dd_hh-mm") + trialNum + ".txt";
         }
-        private void logTime(string objectname)
+        private void logTime(int timeIn)
         {
             time = DateTime.Now.ToString("hh:mm:ss.ff");
-            datapoint = "Img0: Found " + objectname + " @ " + time + " on " + compID + "\n";
+            datapoint = "Img0: " + compID + " @ " + time + "::" + timeIn.ToString() + "\n";
             System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
             file.WriteLine(datapoint);
             file.Close();
@@ -249,7 +238,7 @@ namespace HiddenSearch
         }
         private void nextImageButton(object sender, RoutedEventArgs e)
         {
-            Window1 window1 = new Window1();
+            Window1 window1 = new Window1(path, compID, defaultSenderIP);
             window1.Show();
             this.Close();
         }
@@ -449,20 +438,22 @@ namespace HiddenSearch
                     stage++;
                     nextHighlight(System.Windows.Media.Colors.Purple, "pear");
                     t1 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    time1 = (int)(t1 - t0);
+                    logTime(time1);
                 }
                 else if (stage == 1 && box.Name.CompareTo("pear") == 0)
                 {
                     stage++;
                     nextHighlight(System.Windows.Media.Colors.Purple, "cone");
                     t2 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    time2 = (int)(t2 - t1);
+                    logTime(time2);
                 }
                 else if (stage == 2 && box.Name.CompareTo("cone") == 0) {
                     stage++;
                     t3 = DateTime.Now.TimeOfDay.TotalSeconds;
-                    time1 = (int)(t1 - t0);
-                    time2 = (int)(t2 - t1);
                     time3 = (int)(t3 - t2);
-                    test.Text = time1.ToString() + " " + time2.ToString() + " " + time3.ToString();
+                    logTime(time3);
                 }
             }
             else {
@@ -473,12 +464,16 @@ namespace HiddenSearch
                         stage++;
                         nextHighlight(System.Windows.Media.Colors.Red, "fish");
                         t1 = DateTime.Now.TimeOfDay.TotalSeconds;
+                        time1 = (int)(t1 - t0);
+                        logTime(time1);
                     }
                     else if (box.Name.CompareTo("candycane") == 0)
                     {
                         stage++;
                         nextHighlight(System.Windows.Media.Colors.Blue, "shoe");
                         t1 = DateTime.Now.TimeOfDay.TotalSeconds;
+                        time1 = (int)(t1 - t0);
+                        logTime(time1);
                     }
                 }
                 else if (stage == 1)
@@ -488,12 +483,16 @@ namespace HiddenSearch
                         stage++;
                         nextHighlight(System.Windows.Media.Colors.Red, "pencil");
                         t2 = DateTime.Now.TimeOfDay.TotalSeconds;
+                        time2 = (int)(t2 - t1);
+                        logTime(time2);
                     }
                     else if (box.Name.CompareTo("shoe") == 0)
                     {
                         stage++;
                         nextHighlight(System.Windows.Media.Colors.Blue, "mushroom");
                         t2 = DateTime.Now.TimeOfDay.TotalSeconds;
+                        time2 = (int)(t2 - t1);
+                        logTime(time2);
                     }
                 }
                 else if (stage == 2) {
@@ -501,19 +500,15 @@ namespace HiddenSearch
                     {
                         stage++;
                         t3 = DateTime.Now.TimeOfDay.TotalSeconds;
-                        time1 = (int)(t1 - t0);
-                        time2 = (int)(t2 - t1);
                         time3 = (int)(t3 - t2);
-                        test.Text = time1.ToString() + " " + time2.ToString() + " " + time3.ToString();
+                        logTime(time3);
                     }
                     else if (box.Name.CompareTo("mushroom") == 0)
                     {
                         stage++;
                         t3 = DateTime.Now.TimeOfDay.TotalSeconds;
-                        time1 = (int)(t1 - t0);
-                        time2 = (int)(t2 - t1);
                         time3 = (int)(t3 - t2);
-                        test.Text = time1.ToString() + " " + time2.ToString() + " " + time3.ToString();
+                        logTime(time3);
                     }
                 }
             }
