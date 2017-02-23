@@ -49,8 +49,10 @@ namespace HiddenSearch
         private static string defaultSenderIP = "169.254.41.115";
 
         int ind_1, ind_2, ind_3, ind_4;
-
-        int picture = 1; //0 for cats
+        int stage = 0;
+        bool together = true;
+        double t0, t1, t2, t3;
+        int time1, time2, time3;
 
         //Fixation vis
         Point fixationTrack = new Point(0, 0);
@@ -120,6 +122,41 @@ namespace HiddenSearch
                 Share_Status_Text.Visibility = Visibility.Visible;
                 communication_started_Sender = false;
             }
+            setup();
+        }
+
+        private void setup()
+        {
+            Rectangle test = new Rectangle();
+            foreach (UIElement child in myCanvas.Children)
+            {
+                if (Equals(child.GetType(), test.GetType()))
+                {
+                    child.Visibility = Visibility.Hidden;
+                }
+            }
+            bg.Visibility = Visibility.Visible;
+            key.Visibility = Visibility.Visible;
+            if (together)
+            {
+                nextHighlight(System.Windows.Media.Colors.Purple, "candle");
+            }
+            else
+            {
+                nextHighlight(System.Windows.Media.Colors.Red, "bandaid");
+                nextHighlight(System.Windows.Media.Colors.Blue, "pumpkin");
+            }
+            t0 = DateTime.Now.TimeOfDay.TotalSeconds;
+        }
+
+        private void nextHighlight(System.Windows.Media.Color color, String name)
+        {
+            Rectangle hitem = FindName(name) as Rectangle;
+            Rectangle hkey = FindName("s" + name) as Rectangle;
+            hkey.Visibility = Visibility.Visible;
+            hitem.Visibility = Visibility.Visible;
+            hkey.Fill = new SolidColorBrush(color);
+            hkey.Opacity = .5;
         }
 
         #region buttons
@@ -359,8 +396,85 @@ namespace HiddenSearch
         {
             Rectangle box = sender as Rectangle;
             Rectangle key = FindName("s" + box.Name) as Rectangle;
+            key.Fill = new SolidColorBrush(System.Windows.Media.Colors.Black);
             box.Opacity = .5;
             key.Opacity = .8;
+            if (together)
+            {
+                if (stage == 0 && box.Name.CompareTo("candle") == 0)
+                {
+                    stage++;
+                    nextHighlight(System.Windows.Media.Colors.Purple, "seal");
+                    t1 = DateTime.Now.TimeOfDay.TotalSeconds;
+                }
+                else if (stage == 1 && box.Name.CompareTo("seal") == 0)
+                {
+                    stage++;
+                    nextHighlight(System.Windows.Media.Colors.Purple, "cat");
+                    t2 = DateTime.Now.TimeOfDay.TotalSeconds;
+                }
+                else if (stage == 2 && box.Name.CompareTo("cat") == 0) {
+                    stage++;
+                    t3 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    time1 = (int)(t1 - t0);
+                    time2 = (int)(t2 - t1);
+                    time3 = (int)(t3 - t2);
+                    test.Text = time1.ToString() + " " + time2.ToString() + " " + time3.ToString();
+                }
+            }
+            else
+            {
+                if (stage == 0)
+                {
+                    if (box.Name.CompareTo("bandaid") == 0)
+                    {
+                        stage++;
+                        nextHighlight(System.Windows.Media.Colors.Red, "crayfish");
+                        t1 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    }
+                    else if (box.Name.CompareTo("pumpkin") == 0)
+                    {
+                        stage++;
+                        nextHighlight(System.Windows.Media.Colors.Blue, "sock");
+                        t1 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    }
+                }
+                else if (stage == 1)
+                {
+                    if (box.Name.CompareTo("crayfish") == 0)
+                    {
+                        stage++;
+                        nextHighlight(System.Windows.Media.Colors.Red, "toothbrush");
+                        t2 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    }
+                    else if (box.Name.CompareTo("sock") == 0)
+                    {
+                        stage++;
+                        nextHighlight(System.Windows.Media.Colors.Blue, "bell");
+                        t2 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    }
+                }
+                else if (stage == 2) {
+                    if (box.Name.CompareTo("toothbrush") == 0)
+                    {
+                        stage++;
+                        t3 = DateTime.Now.TimeOfDay.TotalSeconds;
+                        time1 = (int)(t1 - t0);
+                        time2 = (int)(t2 - t1);
+                        time3 = (int)(t3 - t2);
+                        test.Text = time1.ToString() + " " + time2.ToString() + " " + time3.ToString();
+                    }
+                    else if (box.Name.CompareTo("bell") == 0)
+                    {
+                        stage++;
+                        t3 = DateTime.Now.TimeOfDay.TotalSeconds;
+                        time1 = (int)(t1 - t0);
+                        time2 = (int)(t2 - t1);
+                        time3 = (int)(t3 - t2);
+                        test.Text = time1.ToString() + " " + time2.ToString() + " " + time3.ToString();
+                    }
+                }
+            }
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
