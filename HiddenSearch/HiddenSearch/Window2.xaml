@@ -7,16 +7,17 @@
         mc:Ignorable="d"
         Title="Window2" Height="900" Width="1200">
     <Canvas x:Name="myCanvas">
-        <TextBlock Panel.ZIndex="53" Name="Receive_Status_Text" Foreground="Black" Canvas.Right="30" Canvas.Top="30" MaxWidth="266.67" Text="Receiving Data" TextAlignment="Right" FontSize="18" HorizontalAlignment="Center" Visibility="Visible"/>
-        <TextBlock Panel.ZIndex="53" Name="Share_Status_Text" Foreground="Black" Canvas.Right="30" Canvas.Top="80" MaxWidth="266.67" Text="Sharing Data" TextAlignment="Right" FontSize="18" HorizontalAlignment="Center" Visibility="Visible"/>
+        <TextBlock Panel.ZIndex="750" Name="Receive_Status_Text" Foreground="Black" Background="Transparent" Canvas.Right="30" Canvas.Top="30" MaxWidth="266.67" Text="Receiving Data" TextAlignment="Right" FontSize="18" HorizontalAlignment="Center" Visibility="Visible"/>
+        <TextBlock Panel.ZIndex="750" Name="Share_Status_Text" Foreground="Black" Background="Transparent" Canvas.Right="30" Canvas.Top="80" MaxWidth="266.67" Text="Sharing Data" TextAlignment="Right" FontSize="18" HorizontalAlignment="Center" Visibility="Visible"/>
+        <TextBlock Panel.ZIndex="750" Name="WrongClicks" Foreground="Red" Background="Transparent" Canvas.Right="30" Canvas.Top="230" MaxWidth="266.67" Text="Wrong Clicks: " TextAlignment="Right" FontSize="18"/>
         <TextBlock Name="test" Canvas.Right="20" Canvas.Top="200" FontSize="15"></TextBlock>
-        <Ellipse Name="track0" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Fill="Purple" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
-        <Ellipse Name="track1" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Fill="Black" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
-        <Line Name="trackLine" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Stroke="Black" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="0"></Line>
-        <Ellipse Name="otrack0" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Fill="Red" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
-        <Ellipse Name="otrack1" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Fill="Black" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
-        <Line Name="otrackLine" Visibility="Hidden" Opacity="1" Panel.ZIndex="60" Stroke="Black" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="0"></Line>
-        <Ellipse Name="doubleHighlight" Visibility="Hidden" Opacity=".7" Panel.ZIndex="60" StrokeThickness="5" Stroke="DarkBlue" Width="50" Height="50" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Ellipse Name="track0" Visibility="Hidden" Opacity="1" Panel.ZIndex="800" Fill="Purple" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Ellipse Name="track1" Visibility="Hidden" Opacity="1" Panel.ZIndex="800" Fill="Black" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Line Name="trackLine" Visibility="Hidden" Opacity="1" Panel.ZIndex="800" Stroke="Black" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="0"></Line>
+        <Ellipse Name="otrack0" Visibility="Hidden" Opacity="1" Panel.ZIndex="800" Fill="Red" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Ellipse Name="otrack1" Visibility="Hidden" Opacity="1" Panel.ZIndex= "800" Fill="Black" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
+        <Line Name="otrackLine" Visibility="Hidden" Opacity="1" Panel.ZIndex="800" Stroke="Black" StrokeThickness="1" X1="0" X2="0" Y1="0" Y2="0"></Line>
+        <Ellipse Name="doubleHighlight" Visibility="Hidden" Opacity=".7" Panel.ZIndex="800" StrokeThickness="5" Stroke="DarkBlue" Width="50" Height="50" Canvas.Left="0" Canvas.Top="0"></Ellipse>
         <Button x:Name="GazeButton"
                 Panel.ZIndex="800"
                 Content="Turn on Gazepath"

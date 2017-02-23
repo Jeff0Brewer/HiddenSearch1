@@ -31,6 +31,7 @@ namespace HiddenSearch
     /// </summary>
     public partial class Window2 : Window
     {
+        #region Variables
         private bool SenderOn = true;
         private bool ReceiverOn = true;
         private static int ReceiverPort = 11000, SenderPort = 11000;//ReceiverPort is the port used by Receiver, SenderPort is the port used by Sender
@@ -49,8 +50,6 @@ namespace HiddenSearch
         private static string defaultSenderIP = "169.254.41.115";
 
         int ind_1, ind_2, ind_3, ind_4;
-
-        int picture = 1; //0 for cats
 
         //Fixation vis
         Point fixationTrack = new Point(0, 0);
@@ -86,6 +85,9 @@ namespace HiddenSearch
         bool gazeSetting = false;
         bool fixSetting = false;
         bool heatmapSetting = false;
+
+        int wrongClicks = 0;
+        #endregion
 
         public Window2()
         {
@@ -371,6 +373,7 @@ namespace HiddenSearch
             communication_started_Receiver = false;
             communication_started_Sender = false;
             dispatcherTimer.Stop();
+            eyeXHost.Dispose();
             try
             {
                 communicateThread_Receiver.Abort();
@@ -387,6 +390,9 @@ namespace HiddenSearch
         {
             otherFastTrack.X = e.GetPosition(bg).X;
             otherFastTrack.Y = e.GetPosition(bg).Y;
+
+            wrongClicks++;
+            WrongClicks.Text = string.Format("Wrong Clicks: {0:0}", wrongClicks);
         }
 
         #region Sender/Receiver Methods

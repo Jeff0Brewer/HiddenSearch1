@@ -32,6 +32,7 @@ namespace HiddenSearch
 
     public partial class MainWindow : Window
     {
+        #region Variables
         private bool SenderOn = true;
         private bool ReceiverOn = true;
         private static int ReceiverPort = 11000, SenderPort = 11000;//ReceiverPort is the port used by Receiver, SenderPort is the port used by Sender
@@ -51,7 +52,7 @@ namespace HiddenSearch
 
         int ind_1, ind_2, ind_3, ind_4;
 
-        int picture = 2; //0 for cats, 1 for bugs, 2 for mice
+        int picture = 0; //0 for cats, 1 for bugs, 2 for mice
 
         EyeXHost eyeXHost;
 
@@ -89,12 +90,21 @@ namespace HiddenSearch
         bool fixSetting = false;
         bool heatmapSetting = false;
 
+        int wrongClicks = 0;
+
+        //log
+        string compID = "A";
+        string pathfolder = "C:/Users/Master/Documents/Github/HiddenSearch1/gamelog/";
+        string path;
+        string time;
+        string datapoint;
+        string trialNum = "0";
+        #endregion
+
         public MainWindow()
         {
             DataContext = this;
             InitializeComponent();
-
-            //setup();
 
             if (picture == 1)
             {
@@ -110,7 +120,6 @@ namespace HiddenSearch
             }
             else
             {
-
                 eyeXHost = new EyeXHost();
 
                 eyeXHost.Start();
@@ -142,6 +151,18 @@ namespace HiddenSearch
                     communication_started_Sender = false;
                 }
             }
+        }
+        private void initLog()
+        {
+            path = pathfolder + compID + "_" + DateTime.Now.ToString("MM-dd_") + trialNum + ".txt";
+        }
+        private void logTime(string objectname)
+        {
+            time = DateTime.Now.ToString("hh:mm:ss.ff");
+            datapoint = "Img0: Found " + objectname + " @ " + time + " on " + compID + "\n";
+            System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
+            file.WriteLine(datapoint);
+            file.Close();
         }
 
         #region buttons
@@ -191,6 +212,12 @@ namespace HiddenSearch
                     ellipses[i].Visibility = Visibility.Hidden;
                 }
             }
+        }
+        private void nextImageButton(object sender, RoutedEventArgs e)
+        {
+            Window1 window1 = new Window1();
+            window1.Show();
+            this.Close();
         }
         #endregion
 
@@ -389,7 +416,8 @@ namespace HiddenSearch
             ReceiverOn = false;
             communication_started_Receiver = false;
             communication_started_Sender = false;
-            //dispatcherTimer.Stop();
+            dispatcherTimer.Stop();
+            eyeXHost.Dispose();
             try
             {
                 communicateThread_Receiver.Abort();
@@ -400,12 +428,16 @@ namespace HiddenSearch
                 Console.WriteLine(ex.ToString());
             }
             base.OnClosing(e);
+            
         }
 
         private void bg_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             otherFastTrack.X = e.GetPosition(bg).X;
             otherFastTrack.Y = e.GetPosition(bg).Y;
+
+            wrongClicks++;
+            WrongClicks.Text = string.Format("Wrong Clicks: {0:0}", wrongClicks);
         }
 
         #region Sender/Receiver Methods
