@@ -83,7 +83,6 @@ namespace HiddenSearch
         Color orange = Color.FromArgb(255, 255, 128, 0);
         Color yellow = Color.FromArgb(255, 255, 255, 0);
         Color red = Color.FromArgb(255, 255, 0, 0);
-        double fixTime = 0;
 
         int num_ellipses = 700;
         int ellipse_count = 0;
@@ -251,12 +250,11 @@ namespace HiddenSearch
                 fixationStart = e.Timestamp;
             }
             double fixationtime = e.Timestamp - fixationStart;
-            if (fixationtime > 700 & fixStart)
+            if (fixationtime > 150 & fixStart)
             {
                 fixationTrack = new Point(e.X, e.Y);
                 fixShift = true;
                 fixStart = false;
-                fixTime = fixationtime;
             }
 
             if (e.EventType == FixationDataEventType.End)
