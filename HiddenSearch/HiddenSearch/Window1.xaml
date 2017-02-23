@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HiddenSearch"
         mc:Ignorable="d"
         Title="Window1" Height="737.009" Width="1054.459" WindowState="Maximized">
-    <Canvas x:Name="mCanvas">
+    <Canvas x:Name="myCanvas">
         <TextBlock Panel.ZIndex="53" Name="Receive_Status_Text" Foreground="Black" Canvas.Right="30" Canvas.Top="30" MaxWidth="266.67" Text="Receiving Data" TextAlignment="Right" FontSize="18" HorizontalAlignment="Center" Visibility="Visible"/>
         <TextBlock Panel.ZIndex="53" Name="Share_Status_Text" Foreground="Black" Canvas.Right="30" Canvas.Top="80" MaxWidth="266.67" Text="Sharing Data" TextAlignment="Right" FontSize="18" HorizontalAlignment="Center" Visibility="Visible"/>
         <TextBlock Name="test" Canvas.Right="20" Canvas.Top="200" FontSize="15"></TextBlock>

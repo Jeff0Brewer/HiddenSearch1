@@ -290,7 +290,7 @@ namespace HiddenSearch
             fixEllipse.Fill = brush;
             Canvas.SetLeft(fixEllipse, leftCoord - size / 2);
             Canvas.SetTop(fixEllipse, topCoord - size / 2);
-            mCanvas.Children.Add(fixEllipse);
+            myCanvas.Children.Add(fixEllipse);
         }
         private void addColor(Color color, double leftCoord, double topCoord, double size)
         {
@@ -314,7 +314,7 @@ namespace HiddenSearch
                 ellipses[i].Opacity = 0.01;
                 Panel.SetZIndex(ellipses[i], i);
                 ellipses[i].Visibility = Visibility.Hidden;
-                mCanvas.Children.Add(ellipses[i]);
+                myCanvas.Children.Add(ellipses[i]);
             }
         }
         #endregion

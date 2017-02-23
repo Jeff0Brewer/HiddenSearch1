@@ -55,3 +55,5 @@ C:\Users\Master\Documents\GitHub\HiddenSearch1\HiddenSearch\HiddenSearch\obj\Deb
 C:\Users\Master\Documents\GitHub\HiddenSearch1\HiddenSearch\HiddenSearch\obj\Debug\Window2.g.cs
 C:\Users\Master\Documents\GitHub\HiddenSearch1\HiddenSearch\HiddenSearch\obj\Debug\Window1.baml
 C:\Users\Master\Documents\GitHub\HiddenSearch1\HiddenSearch\HiddenSearch\obj\Debug\Window2.baml
+C:\Users\master\Documents\GitHub\HiddenSearch\HiddenSearch\HiddenSearch\obj\Debug\Window2.g.cs
+C:\Users\master\Documents\GitHub\HiddenSearch\HiddenSearch\HiddenSearch\obj\Debug\Window2.baml
