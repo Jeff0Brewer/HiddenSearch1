@@ -36,7 +36,7 @@ namespace HiddenSearch
 
         //SETUP VARIABLES//
         private static string defaultSenderIP = "169.254.50.139"; //169.254.41.115, 169.254.50.139
-        string compID = "A";
+        string compID = "B";
         bool together = true; //Are partners working together on this image?
         //SETUP VARIABLES//
 
@@ -61,8 +61,6 @@ namespace HiddenSearch
         int stage = 0;
         double t0, t1, t2, t3;
         int time1, time2, time3;
-
-        int frameCount = 0;
 
         EyeXHost eyeXHost;
 
