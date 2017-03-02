@@ -125,7 +125,6 @@
     <Resource Include="answerkey3.jpg" />
     <Resource Include="hiddenimage2.jpg" />
     <Resource Include="HiddenImage3.jpg" />
-    <Resource Include="important.jpg" />
     <Content Include="Tobii.EyeX.Client.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

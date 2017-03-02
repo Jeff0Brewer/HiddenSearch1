@@ -62,6 +62,11 @@ namespace HiddenSearch
         double t0, t1, t2, t3;
         int time1, time2, time3;
 
+<<<<<<< HEAD
+=======
+        TimeSpan timerStart;
+
+>>>>>>> origin/master
         EyeXHost eyeXHost;
 
         //Fixation vis
@@ -174,6 +179,7 @@ namespace HiddenSearch
                 }
             }
             t0 = DateTime.Now.TimeOfDay.TotalSeconds;
+            timerStart = DateTime.Now.TimeOfDay;
         }
 
         private void nextHighlight(System.Windows.Media.Color color, String name)
@@ -282,6 +288,9 @@ namespace HiddenSearch
 
         void update(object sender, EventArgs e)
         {
+            string timetemp = DateTime.Now.TimeOfDay.Subtract(timerStart).ToString();
+            Timer.Text = timetemp.Substring(0, timetemp.Length - 8);
+
             sending = ((int)fastTrack.X).ToString() + "|" + ((int)fastTrack.Y).ToString() + ":" + ((int)fixationTrack.X).ToString() + "!" + ((int)fixationTrack.Y).ToString() + "(" + ((int)(100 * track0.Opacity)).ToString();
             //If user pressed Receiver or Cursor button but communication haven't started yet or has terminated, start a thread on tryCommunicateReceiver()
             if (ReceiverOn && communication_started_Receiver == false)
@@ -449,6 +458,7 @@ namespace HiddenSearch
                 {
                     stage++;
                     nextHighlight(System.Windows.Media.Colors.Purple, "pear");
+                    timerStart = DateTime.Now.TimeOfDay;
                     t1 = DateTime.Now.TimeOfDay.TotalSeconds;
                     time1 = (int)(t1 - t0);
                     logTime(time1);
@@ -457,6 +467,7 @@ namespace HiddenSearch
                 {
                     stage++;
                     nextHighlight(System.Windows.Media.Colors.Purple, "cone");
+                    timerStart = DateTime.Now.TimeOfDay;
                     t2 = DateTime.Now.TimeOfDay.TotalSeconds;
                     time2 = (int)(t2 - t1);
                     logTime(time2);
@@ -464,6 +475,7 @@ namespace HiddenSearch
                 else if (stage == 2 && box.Name.CompareTo("cone") == 0)
                 {
                     stage++;
+                    timerStart = DateTime.Now.TimeOfDay;
                     t3 = DateTime.Now.TimeOfDay.TotalSeconds;
                     time3 = (int)(t3 - t2);
                     logTime(time3);
@@ -477,8 +489,7 @@ namespace HiddenSearch
                     {
                         stage++;
                         nextHighlight(System.Windows.Media.Colors.Red, "fish");
-                        scandycane.Visibility = Visibility.Hidden;
-                        candycane.Visibility = Visibility.Hidden;
+                        timerStart = DateTime.Now.TimeOfDay;
                         t1 = DateTime.Now.TimeOfDay.TotalSeconds;
                         time1 = (int)(t1 - t0);
                         logTime(time1);
@@ -487,8 +498,7 @@ namespace HiddenSearch
                     {
                         stage++;
                         nextHighlight(System.Windows.Media.Colors.Blue, "shoe");
-                        scarrot.Visibility = Visibility.Hidden;
-                        carrot.Visibility = Visibility.Hidden;
+                        timerStart = DateTime.Now.TimeOfDay;
                         t1 = DateTime.Now.TimeOfDay.TotalSeconds;
                         time1 = (int)(t1 - t0);
                         logTime(time1);
@@ -500,6 +510,7 @@ namespace HiddenSearch
                     {
                         stage++;
                         nextHighlight(System.Windows.Media.Colors.Red, "pencil");
+                        timerStart = DateTime.Now.TimeOfDay;
                         t2 = DateTime.Now.TimeOfDay.TotalSeconds;
                         time2 = (int)(t2 - t1);
                         logTime(time2);
@@ -508,6 +519,7 @@ namespace HiddenSearch
                     {
                         stage++;
                         nextHighlight(System.Windows.Media.Colors.Blue, "mushroom");
+                        timerStart = DateTime.Now.TimeOfDay;
                         t2 = DateTime.Now.TimeOfDay.TotalSeconds;
                         time2 = (int)(t2 - t1);
                         logTime(time2);
@@ -518,6 +530,7 @@ namespace HiddenSearch
                     if (box.Name.CompareTo("pencil") == 0)
                     {
                         stage++;
+                        timerStart = DateTime.Now.TimeOfDay;
                         t3 = DateTime.Now.TimeOfDay.TotalSeconds;
                         time3 = (int)(t3 - t2);
                         logTime(time3);
@@ -525,6 +538,7 @@ namespace HiddenSearch
                     else if (box.Name.CompareTo("mushroom") == 0)
                     {
                         stage++;
+                        timerStart = DateTime.Now.TimeOfDay;
                         t3 = DateTime.Now.TimeOfDay.TotalSeconds;
                         time3 = (int)(t3 - t2);
                         logTime(time3);
