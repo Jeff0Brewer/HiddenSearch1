@@ -33,9 +33,12 @@ namespace HiddenSearch
     public partial class MainWindow : Window
     {
         #region Variables
+
+        //SETUP VARIABLES//
         private static string defaultSenderIP = "169.254.50.139"; //169.254.41.115, 169.254.50.139
         string compID = "A";
-        bool together = false; //Are partners working together on this image?
+        bool together = true; //Are partners working together on this image?
+        //SETUP VARIABLES//
 
 
         private bool SenderOn = true;
@@ -58,6 +61,8 @@ namespace HiddenSearch
         int stage = 0;
         double t0, t1, t2, t3;
         int time1, time2, time3;
+
+        int frameCount = 0;
 
         EyeXHost eyeXHost;
 
@@ -140,13 +145,16 @@ namespace HiddenSearch
                 communication_started_Sender = false;
             }
             setup();
-            
+
         }
 
-        private void setup() {
+        private void setup()
+        {
             Rectangle test = new Rectangle();
-            foreach (UIElement child in myCanvas.Children) {
-                if (Equals(child.GetType(), test.GetType())) {
+            foreach (UIElement child in myCanvas.Children)
+            {
+                if (Equals(child.GetType(), test.GetType()))
+                {
                     child.Visibility = Visibility.Hidden;
                 }
             }
@@ -156,14 +164,22 @@ namespace HiddenSearch
             {
                 nextHighlight(System.Windows.Media.Colors.Purple, "mouse");
             }
-            else {
-                nextHighlight(System.Windows.Media.Colors.Red, "carrot");
-                nextHighlight(System.Windows.Media.Colors.Blue, "candycane");
+            else
+            {
+                if (compID.CompareTo("A") == 0)
+                {
+                    nextHighlight(System.Windows.Media.Colors.Red, "carrot");
+                }
+                else
+                {
+                    nextHighlight(System.Windows.Media.Colors.Blue, "candycane");
+                }
             }
             t0 = DateTime.Now.TimeOfDay.TotalSeconds;
         }
 
-        private void nextHighlight(System.Windows.Media.Color color, String name) {
+        private void nextHighlight(System.Windows.Media.Color color, String name)
+        {
             Rectangle hitem = FindName(name) as Rectangle;
             Rectangle hkey = FindName("s" + name) as Rectangle;
             hkey.Visibility = Visibility.Visible;
@@ -194,7 +210,8 @@ namespace HiddenSearch
                 otrack0.Visibility = Visibility.Visible;
                 otrack1.Visibility = Visibility.Visible;
                 otrackLine.Visibility = Visibility.Visible;
-            } else
+            }
+            else
             {
                 GazeButton.Content = "Turn on Gazepath";
                 otrack0.Visibility = Visibility.Hidden;
@@ -267,7 +284,7 @@ namespace HiddenSearch
 
         void update(object sender, EventArgs e)
         {
-            sending = ((int)fastTrack.X).ToString() + "|" + ((int)fastTrack.Y).ToString() + ":" + ((int)fixationTrack.X).ToString() + "!" + ((int)fixationTrack.Y).ToString() + "(" + ((int)(100*track0.Opacity)).ToString();
+            sending = ((int)fastTrack.X).ToString() + "|" + ((int)fastTrack.Y).ToString() + ":" + ((int)fixationTrack.X).ToString() + "!" + ((int)fixationTrack.Y).ToString() + "(" + ((int)(100 * track0.Opacity)).ToString();
             //If user pressed Receiver or Cursor button but communication haven't started yet or has terminated, start a thread on tryCommunicateReceiver()
             if (ReceiverOn && communication_started_Receiver == false)
             {
@@ -295,7 +312,7 @@ namespace HiddenSearch
                 otherFastTrack.Y = Convert.ToInt32(received.Substring(ind_1 + 1, ind_2 - ind_1 - 1));
                 otherFixationTrack.X = Convert.ToInt32(received.Substring(ind_2 + 1, ind_3 - ind_2 - 1));
                 otherFixationTrack.Y = Convert.ToInt32(received.Substring(ind_3 + 1, ind_4 - ind_3 - 1));
-                track0.Opacity = Convert.ToInt32(received.Substring(ind_4 + 1, received.Length - ind_4 - 1))/100;
+                track0.Opacity = Convert.ToInt32(received.Substring(ind_4 + 1, received.Length - ind_4 - 1)) / 100;
 
                 otherFixationTrack = PointFromScreen(otherFixationTrack);
                 Canvas.SetLeft(otrack0, otherFixationTrack.X);
@@ -304,7 +321,7 @@ namespace HiddenSearch
                 otrackLine.Y1 = otherFixationTrack.Y + 5;
 
                 otherFastTrack = PointFromScreen(otherFastTrack);
-                Canvas.SetLeft(otrack1,otherFastTrack.X);
+                Canvas.SetLeft(otrack1, otherFastTrack.X);
                 Canvas.SetTop(otrack1, otherFastTrack.Y);
                 otrackLine.X2 = Canvas.GetLeft(otrack1) + 5;
                 otrackLine.Y2 = Canvas.GetTop(otrack1) + 5;
@@ -384,17 +401,18 @@ namespace HiddenSearch
             }
         }
         #endregion
-        
-        private void doubleTrack() {
+
+        private void doubleTrack()
+        {
             double distance = Math.Sqrt(Math.Pow(fastTrack.X - otherFastTrack.X, 2) + Math.Pow(fastTrack.Y - otherFastTrack.Y, 2));
             if (distance < 125)
             {
-                shareX = (.7*shareX + .3*((fastTrack.X + otherFastTrack.X)/2));
-                shareY = (.7*shareY + .3*((fastTrack.Y + otherFastTrack.Y)/2));
+                shareX = (.7 * shareX + .3 * ((fastTrack.X + otherFastTrack.X) / 2));
+                shareY = (.7 * shareY + .3 * ((fastTrack.Y + otherFastTrack.Y) / 2));
                 shareTime++;
                 awayTime = 0;
-                doubleHighlight.Width += 25/shareTime;
-                doubleHighlight.Height += 25/shareTime;
+                doubleHighlight.Width += 25 / shareTime;
+                doubleHighlight.Height += 25 / shareTime;
                 Canvas.SetLeft(doubleHighlight, shareX - doubleHighlight.Width / 2);
                 Canvas.SetTop(doubleHighlight, shareY - doubleHighlight.Height / 2);
                 if (shareStart)
@@ -409,7 +427,8 @@ namespace HiddenSearch
             else
             {
                 awayTime++;
-                if (awayTime > 10) {
+                if (awayTime > 10)
+                {
                     doubleHighlight.Width = 0;
                     doubleHighlight.Height = 0;
                     shareTime = 0;
@@ -417,7 +436,7 @@ namespace HiddenSearch
                 shareStart = true;
             }
         }
-        
+
 
         private void itemClicked(object sender, MouseButtonEventArgs e)
         {
@@ -444,20 +463,24 @@ namespace HiddenSearch
                     time2 = (int)(t2 - t1);
                     logTime(time2);
                 }
-                else if (stage == 2 && box.Name.CompareTo("cone") == 0) {
+                else if (stage == 2 && box.Name.CompareTo("cone") == 0)
+                {
                     stage++;
                     t3 = DateTime.Now.TimeOfDay.TotalSeconds;
                     time3 = (int)(t3 - t2);
                     logTime(time3);
                 }
             }
-            else {
+            else
+            {
                 if (stage == 0)
                 {
                     if (box.Name.CompareTo("carrot") == 0)
                     {
                         stage++;
                         nextHighlight(System.Windows.Media.Colors.Red, "fish");
+                        scandycane.Visibility = Visibility.Hidden;
+                        candycane.Visibility = Visibility.Hidden;
                         t1 = DateTime.Now.TimeOfDay.TotalSeconds;
                         time1 = (int)(t1 - t0);
                         logTime(time1);
@@ -466,6 +489,8 @@ namespace HiddenSearch
                     {
                         stage++;
                         nextHighlight(System.Windows.Media.Colors.Blue, "shoe");
+                        scarrot.Visibility = Visibility.Hidden;
+                        carrot.Visibility = Visibility.Hidden;
                         t1 = DateTime.Now.TimeOfDay.TotalSeconds;
                         time1 = (int)(t1 - t0);
                         logTime(time1);
@@ -490,7 +515,8 @@ namespace HiddenSearch
                         logTime(time2);
                     }
                 }
-                else if (stage == 2) {
+                else if (stage == 2)
+                {
                     if (box.Name.CompareTo("pencil") == 0)
                     {
                         stage++;
@@ -507,7 +533,7 @@ namespace HiddenSearch
                     }
                 }
             }
-            
+
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
@@ -529,14 +555,11 @@ namespace HiddenSearch
                 Console.WriteLine(ex.ToString());
             }
             base.OnClosing(e);
-            
+
         }
 
         private void bg_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            otherFastTrack.X = e.GetPosition(bg).X;
-            otherFastTrack.Y = e.GetPosition(bg).Y;
-
             wrongClicks++;
             WrongClicks.Text = string.Format("Wrong Clicks: {0:0}", wrongClicks);
         }

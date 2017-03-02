@@ -159,8 +159,13 @@ namespace HiddenSearch
             }
             else
             {
-                nextHighlight(System.Windows.Media.Colors.Red, "cap");
-                nextHighlight(System.Windows.Media.Colors.Blue, "arrow");
+                if (compID.CompareTo("A") == 0)
+                {
+                    nextHighlight(System.Windows.Media.Colors.Red, "cap");
+                }
+                else {
+                    nextHighlight(System.Windows.Media.Colors.Blue, "arrow");
+                }
             }
             t0 = DateTime.Now.TimeOfDay.TotalSeconds;
         }
@@ -463,6 +468,8 @@ namespace HiddenSearch
                     {
                         stage++;
                         nextHighlight(System.Windows.Media.Colors.Red, "mushroom");
+                        sarrow.Visibility = Visibility.Hidden;
+                        arrow.Visibility = Visibility.Hidden;
                         t1 = DateTime.Now.TimeOfDay.TotalSeconds;
                         time1 = (int)(t1 - t0);
                         logTime(time1);
@@ -471,6 +478,8 @@ namespace HiddenSearch
                     {
                         stage++;
                         nextHighlight(System.Windows.Media.Colors.Blue, "nail1");
+                        scap.Visibility = Visibility.Hidden;
+                        cap.Visibility = Visibility.Hidden;
                         t1 = DateTime.Now.TimeOfDay.TotalSeconds;
                         time1 = (int)(t1 - t0);
                         logTime(time1);
@@ -537,9 +546,6 @@ namespace HiddenSearch
 
         private void bg_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            otherFastTrack.X = e.GetPosition(bg).X;
-            otherFastTrack.Y = e.GetPosition(bg).Y;
-
             wrongClicks++;
             WrongClicks.Text = string.Format("Wrong Clicks: {0:0}", wrongClicks);
         }
