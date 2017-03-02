@@ -548,8 +548,8 @@ namespace HiddenSearch
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             //CleanUp();
-            SenderOn = false;
-            ReceiverOn = false;
+            //SenderOn = false;
+            //ReceiverOn = false;
             communication_started_Receiver = false;
             communication_started_Sender = false;
             dispatcherTimer.Stop();

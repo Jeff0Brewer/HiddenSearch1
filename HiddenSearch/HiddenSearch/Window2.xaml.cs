@@ -76,7 +76,7 @@ namespace HiddenSearch
         bool shareStart = true;
         double shareX, shareY;
 
-        EyeXHost eyeXHost = new EyeXHost();
+        EyeXHost eyeXHost; //= new EyeXHost();
 
         //heatmap
         SolidColorBrush brush = new SolidColorBrush();
@@ -112,6 +112,7 @@ namespace HiddenSearch
             compID = id;
             defaultSenderIP = ip;
 
+            eyeXHost = new EyeXHost();
             eyeXHost.Start();
             //var gazeData = eyeXHost.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
             var fixationData = eyeXHost.CreateFixationDataStream(FixationDataMode.Sensitive);

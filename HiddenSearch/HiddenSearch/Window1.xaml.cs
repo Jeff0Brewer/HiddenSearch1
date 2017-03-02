@@ -76,7 +76,7 @@ namespace HiddenSearch
         bool shareStart = true;
         double shareX, shareY;
 
-        EyeXHost eyeXHost = new EyeXHost();
+        EyeXHost eyeXHost; // = new EyeXHost();
 
         //heatmap
         SolidColorBrush brush = new SolidColorBrush();
@@ -111,6 +111,8 @@ namespace HiddenSearch
             path = opath;
             compID = id;
             defaultSenderIP = ip;
+
+            eyeXHost = new EyeXHost();
 
             eyeXHost.Start();
             //var gazeData = eyeXHost.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
@@ -537,8 +539,8 @@ namespace HiddenSearch
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             //CleanUp();
-            SenderOn = false;
-            ReceiverOn = false;
+            //SenderOn = false;
+            //ReceiverOn = false;
             communication_started_Receiver = false;
             communication_started_Sender = false;
             dispatcherTimer.Stop();
