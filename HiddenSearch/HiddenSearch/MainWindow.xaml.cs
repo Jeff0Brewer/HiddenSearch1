@@ -62,11 +62,8 @@ namespace HiddenSearch
         double t0, t1, t2, t3;
         int time1, time2, time3;
 
-<<<<<<< HEAD
-=======
         TimeSpan timerStart;
 
->>>>>>> origin/master
         EyeXHost eyeXHost;
 
         //Fixation vis
