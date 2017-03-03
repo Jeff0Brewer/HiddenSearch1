@@ -29,7 +29,6 @@ namespace HiddenSearch
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     ///
-
     public partial class MainWindow : Window
     {
         #region Variables
@@ -37,7 +36,7 @@ namespace HiddenSearch
         //SETUP VARIABLES//
         private static string defaultSenderIP = "169.254.50.139"; //169.254.41.115 A, 169.254.50.139 B
         string compID = "B";
-        int initialImg = 2; //1 for cats (img1), 2 for caterpillars (img2), 3 for mice (img3)
+        int initialImg = 1; //1 for cats (img1), 2 for caterpillars (img2), 3 for mice (img3)
 
         // bool together = true; //Start together!
 

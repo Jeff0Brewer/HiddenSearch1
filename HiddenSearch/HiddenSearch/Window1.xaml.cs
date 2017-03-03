@@ -256,7 +256,7 @@ namespace HiddenSearch
                 fixationStart = e.Timestamp;
             }
             double fixationtime = e.Timestamp - fixationStart;
-            if (fixationtime > 700 & fixStart)
+            if (fixationtime > 150 & fixStart)
             {
                 fixationTrack = new Point(e.X, e.Y);
                 fixShift = true;
@@ -351,9 +351,6 @@ namespace HiddenSearch
             Canvas.SetTop(track1, (fastTrack.Y - top) / 1.3 + top);
             trackLine.X2 = Canvas.GetLeft(track1) + 5;
             trackLine.Y2 = Canvas.GetTop(track1) + 5;
-
-            //addPermColor(orange, left, top, ellipse_size);
-            //addColor(orange, left, top, ellipse_size);
 
             doubleTrack();
         }
@@ -520,7 +517,7 @@ namespace HiddenSearch
             communication_started_Receiver = false;
             communication_started_Sender = false;
             dispatcherTimer.Stop();
-            eyeXHost.Dispose();
+            //eyeXHost.Dispose();
             try
             {
                 communicateThread_Receiver.Abort();
