@@ -37,7 +37,7 @@ namespace HiddenSearch
         //SETUP VARIABLES//
         private static string defaultSenderIP = "169.254.50.139"; //169.254.41.115 A, 169.254.50.139 B
         string compID = "B";
-        int initialImg = 1;
+        int initialImg = 2; //1 for cats (img1), 2 for caterpillars (img2), 3 for mice (img3)
 
         // bool together = true; //Start together!
 
@@ -109,13 +109,13 @@ namespace HiddenSearch
 
         public MainWindow()
         {
-            if (initialImg == 1)
+            if (initialImg == 2)
             {
                 Window1 window1 = new Window1(path, compID, defaultSenderIP);
                 window1.Show();
                 this.Close();
             }
-            else if (initialImg == 2)
+            else if (initialImg == 3)
             {
                 Window2 window2 = new Window2(path, compID, defaultSenderIP);
                 window2.Show();
@@ -203,7 +203,7 @@ namespace HiddenSearch
             timerStart = DateTime.Now.TimeOfDay;
             time = DateTime.Now.ToString("hh:mm:ss.ff");
             timediff = (int)(currTime - prevTime);
-            datapoint = "Img0: " + compID + " @ " + time + " - " + timediff.ToString() + "sec\n";
+            datapoint = "Img1: " + compID + " @ " + time + " - " + timediff.ToString() + "sec\n";
             System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
             file.WriteLine(datapoint);
             file.Close();

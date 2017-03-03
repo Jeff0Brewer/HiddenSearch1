@@ -185,7 +185,7 @@ namespace HiddenSearch
             timerStart = DateTime.Now.TimeOfDay;
             time = DateTime.Now.ToString("hh:mm:ss.ff");
             timediff = (int)(currTime - prevTime);
-            datapoint = "Img2: " + compID + " @ " + time + " - " + timediff.ToString() + "sec\n";
+            datapoint = "Img3: " + compID + " @ " + time + " - " + timediff.ToString() + "sec\n";
             System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
             file.WriteLine(datapoint);
             file.Close();

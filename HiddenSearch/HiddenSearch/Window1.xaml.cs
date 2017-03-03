@@ -35,7 +35,6 @@ namespace HiddenSearch
         //SETUP VARIABLES//
         private static string defaultSenderIP; //169.254.41.115 A, 169.254.50.139 B
         string compID;
-        int initialImg = 0;
 
         // bool together = true; //Start together!
 
@@ -187,7 +186,7 @@ namespace HiddenSearch
             timerStart = DateTime.Now.TimeOfDay;
             time = DateTime.Now.ToString("hh:mm:ss.ff");
             timediff = (int)(currTime - prevTime);
-            datapoint = "Img1: " + compID + " @ " + time + " - " + timediff.ToString() + "sec\n";
+            datapoint = "Img2: " + compID + " @ " + time + " - " + timediff.ToString() + "sec\n";
             System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
             file.WriteLine(datapoint);
             file.Close();
