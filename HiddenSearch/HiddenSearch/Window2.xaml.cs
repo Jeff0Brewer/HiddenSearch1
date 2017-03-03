@@ -32,9 +32,13 @@ namespace HiddenSearch
     public partial class Window2 : Window
     {
         #region Variables
-        bool together = false;
+        //SETUP VARIABLES//
+        private static string defaultSenderIP; //169.254.41.115 A, 169.254.50.139 B
+        string compID;
 
+        // bool together = true; //Start together!
 
+        EyeXHost eyeXHost;
         private bool SenderOn = true;
         private bool ReceiverOn = true;
         private static int ReceiverPort = 11000, SenderPort = 11000;//ReceiverPort is the port used by Receiver, SenderPort is the port used by Sender
@@ -50,13 +54,11 @@ namespace HiddenSearch
         private System.Windows.Threading.DispatcherTimer dispatcherTimer;
         private static String sending;
         private static String received;
-        private static string defaultSenderIP = "169.254.41.115";
 
         int ind_1, ind_2, ind_3, ind_4;
-
         int stage = 0;
-        double t0, t1, t2, t3;
-        int time1, time2, time3;
+        double t0, t1, t2, t3, t4, t5, t6;
+        //int time1, time2, time3;
 
         TimeSpan timerStart;
 
@@ -76,14 +78,11 @@ namespace HiddenSearch
         bool shareStart = true;
         double shareX, shareY;
 
-        EyeXHost eyeXHost; //= new EyeXHost();
-
         //heatmap
         SolidColorBrush brush = new SolidColorBrush();
         Color orange = Color.FromArgb(255, 255, 128, 0);
         Color yellow = Color.FromArgb(255, 255, 255, 0);
         Color red = Color.FromArgb(255, 255, 0, 0);
-        double fixTime = 0;
 
         int num_ellipses = 700;
         int ellipse_count = 0;
@@ -97,34 +96,29 @@ namespace HiddenSearch
 
         int wrongClicks = 0;
 
+        //log
+        string pathfolder = "C:/Users/master/Documents/Github/HiddenSearch/gamelog/";
         string path;
         string time;
         string datapoint;
-        string compID;
-        #endregion
-
+        int timediff;
+#endregion
         public Window2(string opath, string id, string ip)
         {
             DataContext = this;
             InitializeComponent();
+            eyeXHost = new EyeXHost();
+            eyeXHost.Start();
 
             path = opath;
             compID = id;
             defaultSenderIP = ip;
 
-            eyeXHost = new EyeXHost();
-            eyeXHost.Start();
             //var gazeData = eyeXHost.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
             var fixationData = eyeXHost.CreateFixationDataStream(FixationDataMode.Sensitive);
             var gazeData = eyeXHost.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
             fixationData.Next += fixTrack;
             gazeData.Next += trackDot;
-
-            dispatcherTimer = new System.Windows.Threading.DispatcherTimer(System.Windows.Threading.DispatcherPriority.Render);
-            dispatcherTimer.Tick += new EventHandler(update);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
-            dispatcherTimer.Start();
-
             initializeHeatmap();
 
             if (ReceiverOn)
@@ -141,6 +135,11 @@ namespace HiddenSearch
                 Share_Status_Text.Visibility = Visibility.Visible;
                 communication_started_Sender = false;
             }
+            
+            dispatcherTimer = new System.Windows.Threading.DispatcherTimer(System.Windows.Threading.DispatcherPriority.Render);
+            dispatcherTimer.Tick += new EventHandler(update);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
+            dispatcherTimer.Start();
             setup();
         }
 
@@ -156,20 +155,9 @@ namespace HiddenSearch
             }
             bg.Visibility = Visibility.Visible;
             key.Visibility = Visibility.Visible;
-            if (together)
-            {
-                nextHighlight(System.Windows.Media.Colors.Purple, "candle");
-            }
-            else
-            {
-                if (compID.CompareTo("A") == 0)
-                {
-                    nextHighlight(System.Windows.Media.Colors.Red, "bandaid");
-                }
-                else {
-                    nextHighlight(System.Windows.Media.Colors.Blue, "pumpkin");
-                }
-            }
+            nextHighlight(System.Windows.Media.Colors.Purple, "candle");
+     
+            initLog();
             t0 = DateTime.Now.TimeOfDay.TotalSeconds;
             timerStart = DateTime.Now.TimeOfDay;
         }
@@ -183,11 +171,21 @@ namespace HiddenSearch
             hkey.Fill = new SolidColorBrush(color);
             hkey.Opacity = .5;
         }
-
-        private void logTime(int timeIn)
+        private void initLog()
         {
+            path = pathfolder + compID + "_" + DateTime.Now.ToString("MM-dd_hh-mm") + ".txt";
             time = DateTime.Now.ToString("hh:mm:ss.ff");
-            datapoint = "Img2: " + compID + " @ " + time + "::" + timeIn.ToString() + "\n";
+            datapoint = "Starting @ " + time + "sec\n";
+            System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
+            file.WriteLine(datapoint);
+            file.Close();
+        }
+        private void logTime(double currTime, double prevTime)
+        {
+            timerStart = DateTime.Now.TimeOfDay;
+            time = DateTime.Now.ToString("hh:mm:ss.ff");
+            timediff = (int)(currTime - prevTime);
+            datapoint = "Img2: " + compID + " @ " + time + " - " + timediff.ToString() + "sec\n";
             System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
             file.WriteLine(datapoint);
             file.Close();
@@ -256,7 +254,7 @@ namespace HiddenSearch
                 fixationTrack = new Point(e.X, e.Y);
                 fixShift = true;
                 fixStart = false;
-                fixTime = fixationtime;
+                //fixTime = fixationtime;
             }
 
             if (e.EventType == FixationDataEventType.End)
@@ -436,97 +434,76 @@ namespace HiddenSearch
             key.Fill = new SolidColorBrush(System.Windows.Media.Colors.Black);
             box.Opacity = .5;
             key.Opacity = .8;
-            if (together)
+
+            if (stage == 0 && box.Name.CompareTo("candle") == 0)
             {
-                if (stage == 0 && box.Name.CompareTo("candle") == 0)
+                nextHighlight(System.Windows.Media.Colors.Purple, "seal");
+                t1 = DateTime.Now.TimeOfDay.TotalSeconds;
+                logTime(t1, t0);
+            }
+            else if (stage == 1 && box.Name.CompareTo("seal") == 0)
+            {
+                nextHighlight(System.Windows.Media.Colors.Purple, "cat");
+                t2 = DateTime.Now.TimeOfDay.TotalSeconds;
+                logTime(t2, t1);
+            }
+            else if (stage == 2 && box.Name.CompareTo("cat") == 0)
+            {
+                t3 = DateTime.Now.TimeOfDay.TotalSeconds;
+                logTime(t3, t1);
+                if (compID.CompareTo("A") == 0)
                 {
-                    stage++;
-                    nextHighlight(System.Windows.Media.Colors.Purple, "seal");
-                    timerStart = DateTime.Now.TimeOfDay;
-                    t1 = DateTime.Now.TimeOfDay.TotalSeconds;
-                    time1 = (int)(t1 - t0);
-                    logTime(time1);
+                    nextHighlight(System.Windows.Media.Colors.Red, "bandaid");
                 }
-                else if (stage == 1 && box.Name.CompareTo("seal") == 0)
+                else
                 {
-                    stage++;
-                    nextHighlight(System.Windows.Media.Colors.Purple, "cat");
-                    timerStart = DateTime.Now.TimeOfDay;
-                    t2 = DateTime.Now.TimeOfDay.TotalSeconds;
-                    time2 = (int)(t2 - t1);
-                    logTime(time2);
-                }
-                else if (stage == 2 && box.Name.CompareTo("cat") == 0) {
-                    stage++;
-                    timerStart = DateTime.Now.TimeOfDay;
-                    t3 = DateTime.Now.TimeOfDay.TotalSeconds;
-                    time3 = (int)(t3 - t2);
-                    logTime(time3);
+                    nextHighlight(System.Windows.Media.Colors.Blue, "pumpkin");
                 }
             }
-            else
+            else if (stage == 3)
             {
-                if (stage == 0)
+                if (box.Name.CompareTo("bandaid") == 0)
                 {
-                    if (box.Name.CompareTo("bandaid") == 0)
-                    {
-                        stage++;
-                        nextHighlight(System.Windows.Media.Colors.Red, "crayfish");
-                        timerStart = DateTime.Now.TimeOfDay;
-                        t1 = DateTime.Now.TimeOfDay.TotalSeconds;
-                        time1 = (int)(t1 - t0);
-                        logTime(time1);
-                    }
-                    else if (box.Name.CompareTo("pumpkin") == 0)
-                    {
-                        stage++;
-                        nextHighlight(System.Windows.Media.Colors.Blue, "sock");
-                        timerStart = DateTime.Now.TimeOfDay;
-                        t1 = DateTime.Now.TimeOfDay.TotalSeconds;
-                        time1 = (int)(t1 - t0);
-                        logTime(time1);
-                    }
+                    nextHighlight(System.Windows.Media.Colors.Red, "crayfish");
+                    t4 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    logTime(t4, t3);
                 }
-                else if (stage == 1)
+                else if (box.Name.CompareTo("pumpkin") == 0)
                 {
-                    if (box.Name.CompareTo("crayfish") == 0)
-                    {
-                        stage++;
-                        nextHighlight(System.Windows.Media.Colors.Red, "toothbrush");
-                        timerStart = DateTime.Now.TimeOfDay;
-                        t2 = DateTime.Now.TimeOfDay.TotalSeconds;
-                        time2 = (int)(t2 - t1);
-                        logTime(time2);
-                    }
-                    else if (box.Name.CompareTo("sock") == 0)
-                    {
-                        stage++;
-                        nextHighlight(System.Windows.Media.Colors.Blue, "bell");
-                        timerStart = DateTime.Now.TimeOfDay;
-                        t2 = DateTime.Now.TimeOfDay.TotalSeconds;
-                        time2 = (int)(t2 - t1);
-                        logTime(time2);
-                    }
-                }
-                else if (stage == 2) {
-                    if (box.Name.CompareTo("toothbrush") == 0)
-                    {
-                        stage++;
-                        timerStart = DateTime.Now.TimeOfDay;
-                        t3 = DateTime.Now.TimeOfDay.TotalSeconds;
-                        time3 = (int)(t3 - t2);
-                        logTime(time3);
-                    }
-                    else if (box.Name.CompareTo("bell") == 0)
-                    {
-                        stage++;
-                        timerStart = DateTime.Now.TimeOfDay;
-                        t3 = DateTime.Now.TimeOfDay.TotalSeconds;
-                        time3 = (int)(t3 - t2);
-                        logTime(time3);
-                    }
+                    nextHighlight(System.Windows.Media.Colors.Blue, "sock");
+                    t4 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    logTime(t4, t3);
                 }
             }
+            else if (stage == 4)
+            {
+                if (box.Name.CompareTo("crayfish") == 0)
+                {
+                    nextHighlight(System.Windows.Media.Colors.Red, "toothbrush");
+                    t5 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    logTime(t5, t4);
+                }
+                else if (box.Name.CompareTo("sock") == 0)
+                {
+                    nextHighlight(System.Windows.Media.Colors.Blue, "bell");
+                    t5 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    logTime(t5, t4);
+                }
+            }
+            else if (stage == 5)
+            {
+                if (box.Name.CompareTo("toothbrush") == 0)
+                {
+                    t6 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    logTime(t5, t4);
+                }
+                else if (box.Name.CompareTo("bell") == 0)
+                {
+                    t6 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    logTime(t6, t5);
+                }
+            }
+            stage++;
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)

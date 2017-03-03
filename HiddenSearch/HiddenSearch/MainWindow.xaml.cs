@@ -35,12 +35,13 @@ namespace HiddenSearch
         #region Variables
 
         //SETUP VARIABLES//
-        private static string defaultSenderIP = "169.254.50.139"; //169.254.41.115, 169.254.50.139
+        private static string defaultSenderIP = "169.254.50.139"; //169.254.41.115 A, 169.254.50.139 B
         string compID = "B";
-        bool together = true; //Are partners working together on this image?
-        //SETUP VARIABLES//
+        int initialImg = 1;
 
+        // bool together = true; //Start together!
 
+        EyeXHost eyeXHost;
         private bool SenderOn = true;
         private bool ReceiverOn = true;
         private static int ReceiverPort = 11000, SenderPort = 11000;//ReceiverPort is the port used by Receiver, SenderPort is the port used by Sender
@@ -59,12 +60,10 @@ namespace HiddenSearch
 
         int ind_1, ind_2, ind_3, ind_4;
         int stage = 0;
-        double t0, t1, t2, t3;
-        int time1, time2, time3;
+        double t0, t1, t2, t3, t4, t5, t6;
+        //int time1, time2, time3;
 
         TimeSpan timerStart;
-
-        EyeXHost eyeXHost;
 
         //Fixation vis
         Point fixationTrack = new Point(0, 0);
@@ -105,29 +104,40 @@ namespace HiddenSearch
         string path;
         string time;
         string datapoint;
+        int timediff;
         #endregion
 
         public MainWindow()
         {
+            if (initialImg == 1)
+            {
+                Window1 window1 = new Window1(path, compID, defaultSenderIP);
+                window1.Show();
+                this.Close();
+            }
+            else if (initialImg == 2)
+            {
+                Window2 window2 = new Window2(path, compID, defaultSenderIP);
+                window2.Show();
+                this.Close();
+            }
+            else
+            {
+                setupMainWindow();
+            }
+        }
+        private void setupMainWindow()
+        {
             DataContext = this;
             InitializeComponent();
-
             eyeXHost = new EyeXHost();
-
-            initLog();
-
             eyeXHost.Start();
+
             //var gazeData = eyeXHost.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
             var fixationData = eyeXHost.CreateFixationDataStream(FixationDataMode.Sensitive);
             var gazeData = eyeXHost.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
             fixationData.Next += fixTrack;
             gazeData.Next += trackDot;
-
-            dispatcherTimer = new System.Windows.Threading.DispatcherTimer(System.Windows.Threading.DispatcherPriority.Render);
-            dispatcherTimer.Tick += new EventHandler(update);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
-            dispatcherTimer.Start();
-
             initializeHeatmap();
 
             if (ReceiverOn)
@@ -144,10 +154,14 @@ namespace HiddenSearch
                 Share_Status_Text.Visibility = Visibility.Visible;
                 communication_started_Sender = false;
             }
+
+            dispatcherTimer = new System.Windows.Threading.DispatcherTimer(System.Windows.Threading.DispatcherPriority.Render);
+            dispatcherTimer.Tick += new EventHandler(update);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
+            dispatcherTimer.Start();
+
             setup();
-
         }
-
         private void setup()
         {
             Rectangle test = new Rectangle();
@@ -160,21 +174,8 @@ namespace HiddenSearch
             }
             bg.Visibility = Visibility.Visible;
             key.Visibility = Visibility.Visible;
-            if (together)
-            {
-                nextHighlight(System.Windows.Media.Colors.Purple, "mouse");
-            }
-            else
-            {
-                if (compID.CompareTo("A") == 0)
-                {
-                    nextHighlight(System.Windows.Media.Colors.Red, "carrot");
-                }
-                else
-                {
-                    nextHighlight(System.Windows.Media.Colors.Blue, "candycane");
-                }
-            }
+            nextHighlight(System.Windows.Media.Colors.Purple, "mouse");
+            initLog();
             t0 = DateTime.Now.TimeOfDay.TotalSeconds;
             timerStart = DateTime.Now.TimeOfDay;
         }
@@ -191,11 +192,18 @@ namespace HiddenSearch
         private void initLog()
         {
             path = pathfolder + compID + "_" + DateTime.Now.ToString("MM-dd_hh-mm") + ".txt";
-        }
-        private void logTime(int timeIn)
-        {
             time = DateTime.Now.ToString("hh:mm:ss.ff");
-            datapoint = "Img0: " + compID + " @ " + time + "::" + timeIn.ToString() + "\n";
+            datapoint = "Starting @ " + time + "sec\n";
+            System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
+            file.WriteLine(datapoint);
+            file.Close();
+        }
+        private void logTime(double currTime, double prevTime)
+        {
+            timerStart = DateTime.Now.TimeOfDay;
+            time = DateTime.Now.ToString("hh:mm:ss.ff");
+            timediff = (int)(currTime - prevTime);
+            datapoint = "Img0: " + compID + " @ " + time + " - " + timediff.ToString() + "sec\n";
             System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
             file.WriteLine(datapoint);
             file.Close();
@@ -271,7 +279,6 @@ namespace HiddenSearch
                 fixShift = true;
                 fixStart = false;
             }
-
             if (e.EventType == FixationDataEventType.End)
             {
                 fixStart = true;
@@ -360,9 +367,6 @@ namespace HiddenSearch
             trackLine.X2 = Canvas.GetLeft(track1) + 5;
             trackLine.Y2 = Canvas.GetTop(track1) + 5;
 
-            //addPermColor(orange, left, top, ellipse_size);
-            //addColor(orange, left, top, ellipse_size);
-
             doubleTrack();
         }
 
@@ -441,7 +445,6 @@ namespace HiddenSearch
             }
         }
 
-
         private void itemClicked(object sender, MouseButtonEventArgs e)
         {
             Rectangle box = sender as Rectangle;
@@ -449,100 +452,76 @@ namespace HiddenSearch
             key.Fill = new SolidColorBrush(System.Windows.Media.Colors.Black);
             box.Opacity = .5;
             key.Opacity = .8;
-            if (together)
-            {
-                if (stage == 0 && box.Name.CompareTo("mouse") == 0)
-                {
-                    stage++;
-                    nextHighlight(System.Windows.Media.Colors.Purple, "pear");
-                    timerStart = DateTime.Now.TimeOfDay;
-                    t1 = DateTime.Now.TimeOfDay.TotalSeconds;
-                    time1 = (int)(t1 - t0);
-                    logTime(time1);
-                }
-                else if (stage == 1 && box.Name.CompareTo("pear") == 0)
-                {
-                    stage++;
-                    nextHighlight(System.Windows.Media.Colors.Purple, "cone");
-                    timerStart = DateTime.Now.TimeOfDay;
-                    t2 = DateTime.Now.TimeOfDay.TotalSeconds;
-                    time2 = (int)(t2 - t1);
-                    logTime(time2);
-                }
-                else if (stage == 2 && box.Name.CompareTo("cone") == 0)
-                {
-                    stage++;
-                    timerStart = DateTime.Now.TimeOfDay;
-                    t3 = DateTime.Now.TimeOfDay.TotalSeconds;
-                    time3 = (int)(t3 - t2);
-                    logTime(time3);
-                }
-            }
-            else
-            {
-                if (stage == 0)
-                {
-                    if (box.Name.CompareTo("carrot") == 0)
-                    {
-                        stage++;
-                        nextHighlight(System.Windows.Media.Colors.Red, "fish");
-                        timerStart = DateTime.Now.TimeOfDay;
-                        t1 = DateTime.Now.TimeOfDay.TotalSeconds;
-                        time1 = (int)(t1 - t0);
-                        logTime(time1);
-                    }
-                    else if (box.Name.CompareTo("candycane") == 0)
-                    {
-                        stage++;
-                        nextHighlight(System.Windows.Media.Colors.Blue, "shoe");
-                        timerStart = DateTime.Now.TimeOfDay;
-                        t1 = DateTime.Now.TimeOfDay.TotalSeconds;
-                        time1 = (int)(t1 - t0);
-                        logTime(time1);
-                    }
-                }
-                else if (stage == 1)
-                {
-                    if (box.Name.CompareTo("fish") == 0)
-                    {
-                        stage++;
-                        nextHighlight(System.Windows.Media.Colors.Red, "pencil");
-                        timerStart = DateTime.Now.TimeOfDay;
-                        t2 = DateTime.Now.TimeOfDay.TotalSeconds;
-                        time2 = (int)(t2 - t1);
-                        logTime(time2);
-                    }
-                    else if (box.Name.CompareTo("shoe") == 0)
-                    {
-                        stage++;
-                        nextHighlight(System.Windows.Media.Colors.Blue, "mushroom");
-                        timerStart = DateTime.Now.TimeOfDay;
-                        t2 = DateTime.Now.TimeOfDay.TotalSeconds;
-                        time2 = (int)(t2 - t1);
-                        logTime(time2);
-                    }
-                }
-                else if (stage == 2)
-                {
-                    if (box.Name.CompareTo("pencil") == 0)
-                    {
-                        stage++;
-                        timerStart = DateTime.Now.TimeOfDay;
-                        t3 = DateTime.Now.TimeOfDay.TotalSeconds;
-                        time3 = (int)(t3 - t2);
-                        logTime(time3);
-                    }
-                    else if (box.Name.CompareTo("mushroom") == 0)
-                    {
-                        stage++;
-                        timerStart = DateTime.Now.TimeOfDay;
-                        t3 = DateTime.Now.TimeOfDay.TotalSeconds;
-                        time3 = (int)(t3 - t2);
-                        logTime(time3);
-                    }
-                }
-            }
 
+            if (stage == 0 && box.Name.CompareTo("mouse") == 0)
+            {
+                nextHighlight(System.Windows.Media.Colors.Purple, "pear");
+                t1 = DateTime.Now.TimeOfDay.TotalSeconds;
+                logTime(t1, t0);
+            }
+            else if (stage == 1 && box.Name.CompareTo("pear") == 0)
+            {
+                nextHighlight(System.Windows.Media.Colors.Purple, "cone");
+                t2 = DateTime.Now.TimeOfDay.TotalSeconds;
+                logTime(t2, t1);
+            }
+            else if (stage == 2 && box.Name.CompareTo("cone") == 0)
+            {
+                t3 = DateTime.Now.TimeOfDay.TotalSeconds;
+                logTime(t3, t2);
+                if (compID.CompareTo("A") == 0)
+                {
+                    nextHighlight(System.Windows.Media.Colors.Red, "carrot");
+                }
+                else
+                {
+                    nextHighlight(System.Windows.Media.Colors.Blue, "candycane");
+                }
+            }
+            else if (stage == 3)
+            {
+                if (box.Name.CompareTo("carrot") == 0)
+                {
+                    nextHighlight(System.Windows.Media.Colors.Red, "fish");
+                    t4 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    logTime(t4, t3);
+                }
+                else if (box.Name.CompareTo("candycane") == 0)
+                {
+                    nextHighlight(System.Windows.Media.Colors.Blue, "shoe");
+                    t4 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    logTime(t4, t3);
+                }
+            }
+            else if (stage == 4)
+            {
+                if (box.Name.CompareTo("fish") == 0)
+                {
+                    nextHighlight(System.Windows.Media.Colors.Red, "pencil");
+                    t5 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    logTime(t5, t4);
+                }
+                else if (box.Name.CompareTo("shoe") == 0)
+                {
+                    nextHighlight(System.Windows.Media.Colors.Blue, "mushroom");
+                    t5 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    logTime(t5, t4);
+                }
+            }
+            else if (stage == 5)
+            {
+                if (box.Name.CompareTo("pencil") == 0)
+                {
+                    t6 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    logTime(t6, t5);
+                }
+                else if (box.Name.CompareTo("mushroom") == 0)
+                {
+                    t6 = DateTime.Now.TimeOfDay.TotalSeconds;
+                    logTime(t6, t5);
+                }
+            }
+            stage++;
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
@@ -552,8 +531,8 @@ namespace HiddenSearch
             //ReceiverOn = false;
             communication_started_Receiver = false;
             communication_started_Sender = false;
-            dispatcherTimer.Stop();
-            eyeXHost.Dispose();
+            //dispatcherTimer.Stop();
+            //eyeXHost.Dispose();
             try
             {
                 communicateThread_Receiver.Abort();

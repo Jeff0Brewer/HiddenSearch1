@@ -58,7 +58,7 @@
                 HorizontalAlignment="Center"
                 Margin="10,10,0,0"
                 VerticalAlignment="Top"
-                Visibility="Visible"
+                Visibility="Hidden"
                 Click="nextImageButton"/>
 
         <Rectangle Name="bg" Width="590" Height="890" PreviewMouseDown="bg_PreviewMouseDown">
