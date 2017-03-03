@@ -99,7 +99,7 @@ namespace HiddenSearch
         int wrongClicks = 0;
 
         //log
-        string pathfolder = "C:/Users/master/Documents/Github/HiddenSearch/gamelog/";
+        string pathfolder = "C:/Users/master/Documents/gamelog/";
         string path;
         string time;
         string datapoint;

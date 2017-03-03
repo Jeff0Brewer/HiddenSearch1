@@ -16,7 +16,7 @@ namespace MinimalGazeDataStream
             // SET ID FOR THIS COMPUTER //
             string compID = "A";
 
-            string path = "C:/Users/Master/Documents/GitHub/HiddenSearch/gazelog/" + compID + "_" + DateTime.Now.ToString("MM-dd_hh-mm") + ".txt";
+            string path = "C:/Users/Master/Documents/gazelog/" + compID + "_" + DateTime.Now.ToString("MM-dd_hh-mm") + ".txt";
             string datapoint;
             string time;
             int recordEveryXTime = 15; //don't need to record every point...
