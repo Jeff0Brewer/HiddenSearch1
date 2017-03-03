@@ -175,7 +175,7 @@ namespace HiddenSearch
         {
             path = pathfolder + compID + "_" + DateTime.Now.ToString("MM-dd_hh-mm") + ".txt";
             time = DateTime.Now.ToString("hh:mm:ss.ff");
-            datapoint = "Starting @ " + time + "sec\n";
+            datapoint = "Starting @ " + time + "\n";
             System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
             file.WriteLine(datapoint);
             file.Close();
