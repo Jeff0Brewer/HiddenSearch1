@@ -308,6 +308,7 @@ namespace HiddenSearch
                 otherFixationTrack.X = Convert.ToInt32(received.Substring(ind_2 + 1, ind_3 - ind_2 - 1));
                 otherFixationTrack.Y = Convert.ToInt32(received.Substring(ind_3 + 1, ind_4 - ind_3 - 1));
                 otrack0.Opacity = Convert.ToDouble(received.Substring(ind_4 + 1, received.Length - ind_4 - 1)) / 100;
+                otrackLine.Opacity = otrack0.Opacity;
 
                 otherFixationTrack = PointFromScreen(otherFixationTrack);
                 Canvas.SetLeft(otrack0, otherFixationTrack.X);
@@ -404,8 +405,10 @@ namespace HiddenSearch
                 shareY = (.7 * shareY + .3 * ((fastTrack.Y + otherFastTrack.Y) / 2));
                 shareTime++;
                 awayTime = 0;
-                doubleHighlight.Width += 25 / shareTime;
-                doubleHighlight.Height += 25 / shareTime;
+
+                doubleHighlight.Width = -75 / (1 + Math.Pow(Math.E, shareTime * .5 - 10)) + 75;
+                doubleHighlight.Height = doubleHighlight.Width;
+                doubleHighlight.StrokeThickness = doubleHighlight.Width / 15;
                 Canvas.SetLeft(doubleHighlight, shareX - doubleHighlight.Width / 2);
                 Canvas.SetTop(doubleHighlight, shareY - doubleHighlight.Height / 2);
                 if (shareStart)
@@ -424,6 +427,7 @@ namespace HiddenSearch
                 {
                     doubleHighlight.Width = 0;
                     doubleHighlight.Height = 0;
+                    doubleHighlight.StrokeThickness = 0;
                     shareTime = 0;
                 }
                 shareStart = true;

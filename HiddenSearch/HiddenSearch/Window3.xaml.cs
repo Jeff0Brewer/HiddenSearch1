@@ -398,8 +398,10 @@ namespace HiddenSearch
                 shareY = (.7 * shareY + .3 * ((fastTrack.Y + otherFastTrack.Y) / 2));
                 shareTime++;
                 awayTime = 0;
-                doubleHighlight.Width += 25 / shareTime;
-                doubleHighlight.Height += 25 / shareTime;
+
+                doubleHighlight.Width = -75 / (1 + Math.Pow(Math.E, shareTime * .5 - 10)) + 75;
+                doubleHighlight.Height = doubleHighlight.Width;
+                doubleHighlight.StrokeThickness = doubleHighlight.Width / 15;
                 Canvas.SetLeft(doubleHighlight, shareX - doubleHighlight.Width / 2);
                 Canvas.SetTop(doubleHighlight, shareY - doubleHighlight.Height / 2);
                 if (shareStart)
@@ -418,6 +420,7 @@ namespace HiddenSearch
                 {
                     doubleHighlight.Width = 0;
                     doubleHighlight.Height = 0;
+                    doubleHighlight.StrokeThickness = 0;
                     shareTime = 0;
                 }
                 shareStart = true;
