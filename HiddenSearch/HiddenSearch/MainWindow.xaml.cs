@@ -35,7 +35,7 @@ namespace HiddenSearch
 
         //SETUP VARIABLES//
         private static string defaultSenderIP = "169.254.50.139"; //169.254.41.115 A, 169.254.50.139 B
-        string compID = "B";
+        string compID = "A";
         int initialImg = 4; //1 for cats (img1), 2 for caterpillars (img2), 3 for mice (img3), 4 for (img4)
 
         // bool together = true; //Start together!

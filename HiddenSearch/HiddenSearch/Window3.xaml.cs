@@ -155,7 +155,7 @@ namespace HiddenSearch
                 }
                 bg.Visibility = Visibility.Visible;
                 key.Visibility = Visibility.Visible;
-                nextHighlight(System.Windows.Media.Colors.Purple, "candle");
+                nextHighlight(System.Windows.Media.Colors.Purple, "applepie1");
 
                 initLog();
                 t0 = DateTime.Now.TimeOfDay.TotalSeconds;
@@ -164,12 +164,12 @@ namespace HiddenSearch
 
             private void nextHighlight(System.Windows.Media.Color color, String name)
             {
-                //Rectangle hitem = FindName(name) as Rectangle;
-                //Rectangle hkey = FindName("s" + name) as Rectangle;
-                //hkey.Visibility = Visibility.Visible;
-                //hitem.Visibility = Visibility.Visible;
-                //hkey.Fill = new SolidColorBrush(color);
-                //hkey.Opacity = .5;
+                Rectangle hitem = FindName(name) as Rectangle;
+                Rectangle hkey = FindName("s" + name) as Rectangle;
+                hkey.Visibility = Visibility.Visible;
+                hitem.Visibility = Visibility.Visible;
+                hkey.Fill = new SolidColorBrush(color);
+                hkey.Opacity = .5;
             }
             private void initLog()
             {
@@ -432,57 +432,57 @@ namespace HiddenSearch
                 box.Opacity = .5;
                 key.Opacity = .8;
 
-                if (stage == 0 && box.Name.CompareTo("candle") == 0)
+                if (stage == 0 && box.Name.CompareTo("applepie1") == 0)
                 {
-                    nextHighlight(System.Windows.Media.Colors.Purple, "seal");
+                    nextHighlight(System.Windows.Media.Colors.Purple, "mushroom");
                     t1 = DateTime.Now.TimeOfDay.TotalSeconds;
                     logTime(t1, t0);
                 }
-                else if (stage == 1 && box.Name.CompareTo("seal") == 0)
+                else if (stage == 1 && box.Name.CompareTo("mushroom") == 0)
                 {
-                    nextHighlight(System.Windows.Media.Colors.Purple, "cat");
+                    nextHighlight(System.Windows.Media.Colors.Purple, "firecracker");
                     t2 = DateTime.Now.TimeOfDay.TotalSeconds;
                     logTime(t2, t1);
                 }
-                else if (stage == 2 && box.Name.CompareTo("cat") == 0)
+                else if (stage == 2 && box.Name.CompareTo("firecracker") == 0)
                 {
                     t3 = DateTime.Now.TimeOfDay.TotalSeconds;
                     logTime(t3, t1);
                     if (compID.CompareTo("A") == 0)
                     {
-                        nextHighlight(System.Windows.Media.Colors.Red, "bandaid");
+                        nextHighlight(System.Windows.Media.Colors.Red, "bird");
                     }
                     else
                     {
-                        nextHighlight(System.Windows.Media.Colors.Blue, "pumpkin");
+                        nextHighlight(System.Windows.Media.Colors.Blue, "hotdog");
                     }
                 }
                 else if (stage == 3)
                 {
-                    if (box.Name.CompareTo("bandaid") == 0)
+                    if (box.Name.CompareTo("bird") == 0)
                     {
-                        nextHighlight(System.Windows.Media.Colors.Red, "crayfish");
+                        nextHighlight(System.Windows.Media.Colors.Red, "baseball1");
                         t4 = DateTime.Now.TimeOfDay.TotalSeconds;
                         logTime(t4, t3);
                     }
-                    else if (box.Name.CompareTo("pumpkin") == 0)
+                    else if (box.Name.CompareTo("hotdog") == 0)
                     {
-                        nextHighlight(System.Windows.Media.Colors.Blue, "sock");
+                        nextHighlight(System.Windows.Media.Colors.Blue, "heart1");
                         t4 = DateTime.Now.TimeOfDay.TotalSeconds;
                         logTime(t4, t3);
                     }
                 }
                 else if (stage == 4)
                 {
-                    if (box.Name.CompareTo("crayfish") == 0)
+                    if (box.Name.CompareTo("baseball1") == 0)
                     {
-                        nextHighlight(System.Windows.Media.Colors.Red, "toothbrush");
+                        nextHighlight(System.Windows.Media.Colors.Red, "flag");
                         t5 = DateTime.Now.TimeOfDay.TotalSeconds;
                         logTime(t5, t4);
                     }
-                    else if (box.Name.CompareTo("sock") == 0)
+                    else if (box.Name.CompareTo("heart1") == 0)
                     {
-                        nextHighlight(System.Windows.Media.Colors.Blue, "bell");
+                        nextHighlight(System.Windows.Media.Colors.Blue, "libertybell");
                         t5 = DateTime.Now.TimeOfDay.TotalSeconds;
                         logTime(t5, t4);
                     }
@@ -494,7 +494,7 @@ namespace HiddenSearch
                         t6 = DateTime.Now.TimeOfDay.TotalSeconds;
                         logTime(t5, t4);
                     }
-                    else if (box.Name.CompareTo("bell") == 0)
+                    else if (box.Name.CompareTo("libertybell") == 0)
                     {
                         t6 = DateTime.Now.TimeOfDay.TotalSeconds;
                         logTime(t6, t5);
