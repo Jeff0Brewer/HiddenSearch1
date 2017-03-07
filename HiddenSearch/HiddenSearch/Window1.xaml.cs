@@ -101,17 +101,16 @@ namespace HiddenSearch
         string path;
         string time;
         string datapoint;
-        int timediff;
+        double timediff;
         #endregion
 
-        public Window1(string opath, string id, string ip)
+        public Window1(string id, string ip)
         {
             DataContext = this;
             InitializeComponent();
             eyeXHost = new EyeXHost();
             eyeXHost.Start();
 
-            path = opath;
             compID = id;
             defaultSenderIP = ip;
             
@@ -174,7 +173,7 @@ namespace HiddenSearch
         }
         private void initLog()
         {
-            path = pathfolder + compID + "_" + DateTime.Now.ToString("MM-dd_hh-mm") + ".txt";
+            path = pathfolder + compID + "_" + DateTime.Now.ToString("MM-dd_hh-mm") + "_Img2.txt";
             time = DateTime.Now.ToString("hh:mm:ss.ff");
             datapoint = "Starting @ " + time + "\n";
             System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
@@ -184,9 +183,9 @@ namespace HiddenSearch
         private void logTime(double currTime, double prevTime)
         {
             timerStart = DateTime.Now.TimeOfDay;
-            time = DateTime.Now.ToString("hh:mm:ss.ff");
-            timediff = (int)(currTime - prevTime);
-            datapoint = "Img2: " + compID + " @ " + time + " - " + timediff.ToString() + "sec\n";
+            time = DateTime.Now.ToString("hh:mm:ss.fff");
+            timediff = (currTime - prevTime);
+            datapoint = "Img2: " + compID + " @ " + time + " - " + string.Format("{0:0.000} sec\n", timediff);
             System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
             file.WriteLine(datapoint);
             file.Close();
@@ -243,7 +242,7 @@ namespace HiddenSearch
         }
         private void nextImageButton(object sender, RoutedEventArgs e)
         {
-            Window2 window2 = new Window2(path, compID, defaultSenderIP);
+            Window2 window2 = new Window2(compID, defaultSenderIP);
             window2.Show();
             this.Close();
         }

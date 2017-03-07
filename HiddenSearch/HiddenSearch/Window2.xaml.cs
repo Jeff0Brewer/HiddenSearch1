@@ -101,16 +101,15 @@ namespace HiddenSearch
         string path;
         string time;
         string datapoint;
-        int timediff;
+        double timediff;
 #endregion
-        public Window2(string opath, string id, string ip)
+        public Window2(string id, string ip)
         {
             DataContext = this;
             InitializeComponent();
             eyeXHost = new EyeXHost();
             eyeXHost.Start();
 
-            path = opath;
             compID = id;
             defaultSenderIP = ip;
 
@@ -173,7 +172,7 @@ namespace HiddenSearch
         }
         private void initLog()
         {
-            path = pathfolder + compID + "_" + DateTime.Now.ToString("MM-dd_hh-mm") + ".txt";
+            path = pathfolder + compID + "_" + DateTime.Now.ToString("MM-dd_hh-mm") + "_Img3.txt";
             time = DateTime.Now.ToString("hh:mm:ss.ff");
             datapoint = "Starting @ " + time + "\n";
             System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
@@ -184,8 +183,8 @@ namespace HiddenSearch
         {
             timerStart = DateTime.Now.TimeOfDay;
             time = DateTime.Now.ToString("hh:mm:ss.ff");
-            timediff = (int)(currTime - prevTime);
-            datapoint = "Img3: " + compID + " @ " + time + " - " + timediff.ToString() + "sec\n";
+            timediff = (currTime - prevTime);
+            datapoint = "Img3: " + compID + " @ " + time + " - " + string.Format("{0:0.000} sec\n", timediff);
             System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
             file.WriteLine(datapoint);
             file.Close();

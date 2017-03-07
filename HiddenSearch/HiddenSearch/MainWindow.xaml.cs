@@ -34,9 +34,9 @@ namespace HiddenSearch
         #region Variables
 
         //SETUP VARIABLES//
-        private static string defaultSenderIP = "169.254.41.115"; //169.254.41.115 A, 169.254.50.139 B
-        string compID = "A";
-        int initialImg = 4; //1 for cats (img1), 2 for caterpillars (img2), 3 for mice (img3), 4 for (img4)
+        private static string defaultSenderIP = "169.254.50.139"; //169.254.41.115 A, 169.254.50.139 B
+        string compID = "B";
+        int initialImg = 3; //1 for cats (img1), 2 for caterpillars (img2), 3 for mice (img3), 4 for (img4)
 
         // bool together = true; //Start together!
 
@@ -103,26 +103,26 @@ namespace HiddenSearch
         string path;
         string time;
         string datapoint;
-        int timediff;
+        double timediff;
         #endregion
 
         public MainWindow()
         {
             if (initialImg == 2)
             {
-                Window1 window1 = new Window1(path, compID, defaultSenderIP);
+                Window1 window1 = new Window1(compID, defaultSenderIP);
                 window1.Show();
                 this.Close();
             }
             else if (initialImg == 3)
             {
-                Window2 window2 = new Window2(path, compID, defaultSenderIP);
+                Window2 window2 = new Window2(compID, defaultSenderIP);
                 window2.Show();
                 this.Close();
             }
             else if (initialImg == 4)
             {
-                Window3 window3 = new Window3(path, compID, defaultSenderIP);
+                Window3 window3 = new Window3(compID, defaultSenderIP);
                 window3.Show();
                 this.Close();
             }
@@ -196,7 +196,7 @@ namespace HiddenSearch
         }
         private void initLog()
         {
-            path = pathfolder + compID + "_" + DateTime.Now.ToString("MM-dd_hh-mm") + ".txt";
+            path = pathfolder + compID + "_" + DateTime.Now.ToString("MM-dd_hh-mm") + "_Img1.txt";
             time = DateTime.Now.ToString("hh:mm:ss.ff");
             datapoint = "Starting @ " + time + "\n";
             System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
@@ -205,10 +205,9 @@ namespace HiddenSearch
         }
         private void logTime(double currTime, double prevTime)
         {
-            timerStart = DateTime.Now.TimeOfDay;
-            time = DateTime.Now.ToString("hh:mm:ss.ff");
-            timediff = (int)(currTime - prevTime);
-            datapoint = "Img1: " + compID + " @ " + time + " - " + timediff.ToString() + "sec\n";
+            time = DateTime.Now.ToString("hh:mm:ss.fff");
+            timediff = (currTime - prevTime);
+            datapoint = "Img1: " + compID + " @ " + time + " - " + string.Format("{0:0.000} sec\n", timediff);
             System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
             file.WriteLine(datapoint);
             file.Close();
@@ -265,7 +264,7 @@ namespace HiddenSearch
         }
         private void nextImageButton(object sender, RoutedEventArgs e)
         {
-            Window1 window1 = new Window1(path, compID, defaultSenderIP);
+            Window1 window1 = new Window1(compID, defaultSenderIP);
             window1.Show();
             this.Close();
         }
