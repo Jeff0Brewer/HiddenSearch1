@@ -164,12 +164,12 @@ namespace HiddenSearch
 
             private void nextHighlight(System.Windows.Media.Color color, String name)
             {
-                Rectangle hitem = FindName(name) as Rectangle;
-                Rectangle hkey = FindName("s" + name) as Rectangle;
-                hkey.Visibility = Visibility.Visible;
-                hitem.Visibility = Visibility.Visible;
-                hkey.Fill = new SolidColorBrush(color);
-                hkey.Opacity = .5;
+                //Rectangle hitem = FindName(name) as Rectangle;
+                //Rectangle hkey = FindName("s" + name) as Rectangle;
+                //hkey.Visibility = Visibility.Visible;
+                //hitem.Visibility = Visibility.Visible;
+                //hkey.Fill = new SolidColorBrush(color);
+                //hkey.Opacity = .5;
             }
             private void initLog()
             {
@@ -807,6 +807,3 @@ namespace HiddenSearch
             #endregion
         }
     }
-
-}
-}
