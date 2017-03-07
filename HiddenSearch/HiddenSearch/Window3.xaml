@@ -58,9 +58,9 @@
             </Rectangle.Fill>
         </Rectangle>
         <Rectangle Name="key" Width="360" Height="700" Canvas.Left="680">
-            <!--<Rectangle.Fill>
-                <ImageBrush ImageSource=""></ImageBrush>
-            </Rectangle.Fill>-->
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="answerkey4.jpg"></ImageBrush>
+            </Rectangle.Fill>
         </Rectangle>
         <Rectangle Name="hamburger" Panel.ZIndex="800" Width="48" Height="44" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="491" Canvas.Top="635"></Rectangle>
         <Rectangle x:Name="hotdog" Panel.ZIndex="800" Width="63" Height="27" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="96" Canvas.Top="198" RenderTransformOrigin="0.5,0.5">
@@ -163,5 +163,27 @@
         <Rectangle x:Name="heart3" Panel.ZIndex="800" Width="10" Height="16" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="636" Canvas.Top="486"/>
         <Rectangle x:Name="applepie1" Panel.ZIndex="800" Width="34" Height="86" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="26" Canvas.Top="395"/>
         <Rectangle x:Name="applepie2" Panel.ZIndex="800" Width="34" Height="86" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="74" Canvas.Top="268"/>
+
+        <Rectangle Name="smustard" Width="80" Height="119" Fill="Black" Opacity="0" Canvas.Left="705" Canvas.Top="30"/>
+        <Rectangle x:Name="sbadminton" Width="128" Height="64" Fill="Black" Opacity="0" Canvas.Left="806" Canvas.Top="106"/>
+        <Rectangle x:Name="sbaseball1" Width="69" Height="40" Fill="Black" Opacity="0" Canvas.Left="824"/>
+        <Rectangle x:Name="sbaseball2" Width="69" Height="64" Fill="Black" Opacity="0" Canvas.Left="824" Canvas.Top="40"/>
+        <Rectangle x:Name="sheart1" Width="42" Height="38" Fill="Black" Opacity="0" Canvas.Left="920" Canvas.Top="40"/>
+        <Rectangle x:Name="sbirdy" Width="128" Height="64" Fill="Black" Opacity="0" Canvas.Left="806" Canvas.Top="106"/>
+        <Rectangle x:Name="scone" Width="62" Height="97" Fill="Black" Opacity="0" Canvas.Left="705" Canvas.Top="182"/>
+        <Rectangle x:Name="smushroom" Width="95" Height="48" Fill="Black" Opacity="0" Canvas.Left="892" Canvas.Top="179"/>
+        <Rectangle x:Name="sapplepie1" Width="85" Height="38" Fill="Black" Opacity="0" Canvas.Left="788" Canvas.Top="211"/>
+        <Rectangle x:Name="sapplepie2" Width="85" Height="84" Fill="Black" Opacity="0" Canvas.Left="788" Canvas.Top="249"/>
+        <Rectangle x:Name="sfirecracker" Width="85" Height="101" Fill="Black" Opacity="0" Canvas.Left="940" Canvas.Top="230"/>
+        <Rectangle x:Name="scandle" Width="69" Height="115" Fill="Black" Opacity="0" Canvas.Left="690" Canvas.Top="286"/>
+        <Rectangle x:Name="sheart2" Width="34" Height="41" Fill="Black" Opacity="0" Canvas.Left="824" Canvas.Top="360"/>
+        <Rectangle x:Name="slibertybell" Width="85" Height="101" Fill="Black" Opacity="0" Canvas.Left="890" Canvas.Top="340"/>
+        <Rectangle x:Name="sflag" Width="115" Height="118" Fill="Black" Opacity="0" Canvas.Left="694" Canvas.Top="415"/>
+        <Rectangle x:Name="shamburger" Width="97" Height="67" Fill="Black" Opacity="0" Canvas.Left="833" Canvas.Top="444"/>
+        <Rectangle x:Name="sheart3" Width="31" Height="34" Fill="Black" Opacity="0.7" Canvas.Left="970" Canvas.Top="466"/>
+        <Rectangle x:Name="sbird" Width="97" Height="67" Fill="Black" Opacity="0" Canvas.Left="728" Canvas.Top="535"/>
+        <Rectangle x:Name="stoothbrush" Width="122" Height="53" Fill="Black" Opacity="0" Canvas.Left="865" Canvas.Top="560"/>
+        <Rectangle x:Name="shotdog" Width="80" Height="48" Fill="Black" Opacity="0" Canvas.Left="705" Canvas.Top="639"/>
+        <Rectangle x:Name="sbaton" Width="156" Height="48" Fill="Black" Opacity="0" Canvas.Left="810" Canvas.Top="637"/>
     </Canvas>
 </Window>
