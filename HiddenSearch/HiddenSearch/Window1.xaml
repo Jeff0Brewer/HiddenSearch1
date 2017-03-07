@@ -11,7 +11,7 @@
         <TextBlock Panel.ZIndex="750" Name="Share_Status_Text" Foreground="Black" Background="Transparent" Canvas.Right="30" Canvas.Top="80" MaxWidth="266.67" Text="Sharing Data" TextAlignment="Right" FontSize="18" HorizontalAlignment="Center" Visibility="Visible"/>
         <TextBlock Panel.ZIndex="750" Name="WrongClicks" Foreground="Red" Background="Transparent" Canvas.Right="30" Canvas.Top="230" MaxWidth="266.67" Text="Wrong Clicks: " TextAlignment="Right" FontSize="18"/>
         <TextBlock Panel.ZIndex="750" Name="Timer" Foreground="Red" Background="Transparent" Canvas.Right="30" Canvas.Top="255" TextAlignment="Right" FontSize="18"/>
-        <TextBlock Panel.ZIndex="800" Foreground="Red" Background="Transparent" Canvas.Right="30" Canvas.Bottom="40" Text="Image 2/3" TextAlignment="Right" FontSize="40" Visibility="Visible"/>
+        <TextBlock Panel.ZIndex="800" Foreground="Red" Background="Transparent" Canvas.Right="30" Canvas.Bottom="40" Text="Image 2/4" TextAlignment="Right" FontSize="40" Visibility="Visible"/>
         <TextBlock Name="test" Canvas.Right="20" Canvas.Top="300" FontSize="15"></TextBlock>
         <Ellipse Name="track0" Visibility="Hidden" Opacity="1" Panel.ZIndex="800" Fill="Purple" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>
         <Ellipse Name="track1" Visibility="Hidden" Opacity="1" Panel.ZIndex="800" Fill="Black" Width="10" Height="10" Canvas.Left="0" Canvas.Top="0"></Ellipse>

@@ -36,7 +36,7 @@ namespace HiddenSearch
         //SETUP VARIABLES//
         private static string defaultSenderIP = "169.254.50.139"; //169.254.41.115 A, 169.254.50.139 B
         string compID = "B";
-        int initialImg = 1; //1 for cats (img1), 2 for caterpillars (img2), 3 for mice (img3)
+        int initialImg = 1; //1 for cats (img1), 2 for caterpillars (img2), 3 for mice (img3), 4 for (img4)
 
         // bool together = true; //Start together!
 
@@ -118,6 +118,12 @@ namespace HiddenSearch
             {
                 Window2 window2 = new Window2(path, compID, defaultSenderIP);
                 window2.Show();
+                this.Close();
+            }
+            else if (initialImg == 4)
+            {
+                Window3 window3 = new Window3(path, compID, defaultSenderIP);
+                window3.Show();
                 this.Close();
             }
             else
