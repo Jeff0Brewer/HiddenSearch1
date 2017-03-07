@@ -58,9 +58,9 @@
             </Rectangle.Fill>
         </Rectangle>
         <Rectangle Name="key" Width="360" Height="700" Canvas.Left="680">
-            <Rectangle.Fill>
-                <ImageBrush ImageSource="answerkey4.jpg"></ImageBrush>
-            </Rectangle.Fill>
+            <!--<Rectangle.Fill>
+                <ImageBrush ImageSource=""></ImageBrush>
+            </Rectangle.Fill>-->
         </Rectangle>
         <Rectangle Name="hamburger" Panel.ZIndex="800" Width="48" Height="44" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="491" Canvas.Top="635"></Rectangle>
         <Rectangle x:Name="hotdog" Panel.ZIndex="800" Width="63" Height="27" Fill="Yellow" PreviewMouseDown="itemClicked" Opacity="0" Canvas.Left="96" Canvas.Top="198" RenderTransformOrigin="0.5,0.5">

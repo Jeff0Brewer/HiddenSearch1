@@ -36,7 +36,7 @@ namespace HiddenSearch
         //SETUP VARIABLES//
         private static string defaultSenderIP = "169.254.50.139"; //169.254.41.115 A, 169.254.50.139 B
         string compID = "B";
-        int initialImg = 1; //1 for cats (img1), 2 for caterpillars (img2), 3 for mice (img3), 4 for (img4)
+        int initialImg = 4; //1 for cats (img1), 2 for caterpillars (img2), 3 for mice (img3), 4 for (img4)
 
         // bool together = true; //Start together!
 
@@ -278,7 +278,7 @@ namespace HiddenSearch
                 fixationStart = e.Timestamp;
             }
             double fixationtime = e.Timestamp - fixationStart;
-            if (fixationtime > 700 & fixStart)
+            if (fixationtime > 150 & fixStart)
             {
                 fixationTrack = new Point(e.X, e.Y);
                 fixShift = true;
@@ -328,7 +328,7 @@ namespace HiddenSearch
                 otherFastTrack.Y = Convert.ToInt32(received.Substring(ind_1 + 1, ind_2 - ind_1 - 1));
                 otherFixationTrack.X = Convert.ToInt32(received.Substring(ind_2 + 1, ind_3 - ind_2 - 1));
                 otherFixationTrack.Y = Convert.ToInt32(received.Substring(ind_3 + 1, ind_4 - ind_3 - 1));
-                track0.Opacity = Convert.ToDouble(received.Substring(ind_4 + 1, received.Length - ind_4 - 1)) / 100;
+                track0.Opacity = Convert.ToInt32(received.Substring(ind_4 + 1, received.Length - ind_4 - 1)) / 100;
 
                 otherFixationTrack = PointFromScreen(otherFixationTrack);
                 Canvas.SetLeft(otrack0, otherFixationTrack.X);
