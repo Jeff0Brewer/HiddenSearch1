@@ -34,9 +34,9 @@ namespace HiddenSearch
         #region Variables
 
         //SETUP VARIABLES//
-        private static string defaultSenderIP = "169.254.50.139"; //169.254.41.115 A, 169.254.50.139 B
+        private static string defaultSenderIP = "169.254.41.115"; //169.254.41.115 A, 169.254.50.139 B
         string compID = "B";
-        int initialImg = 4; //1 for cats (img1), 2 for caterpillars (img2), 3 for mice (img3), 4 for (img4)
+        int initialImg = 2; //1 for cats (img1), 2 for caterpillars (img2), 3 for mice (img3), 4 for (img4)
 
         // bool together = true; //Start together!
 
@@ -322,12 +322,33 @@ namespace HiddenSearch
                 ind_2 = received.IndexOf(":");
                 ind_3 = received.IndexOf("!");
                 ind_4 = received.IndexOf("(");
-
-                otherFastTrack.X = Convert.ToInt32(received.Substring(0, ind_1));
-                otherFastTrack.Y = Convert.ToInt32(received.Substring(ind_1 + 1, ind_2 - ind_1 - 1));
-                otherFixationTrack.X = Convert.ToInt32(received.Substring(ind_2 + 1, ind_3 - ind_2 - 1));
-                otherFixationTrack.Y = Convert.ToInt32(received.Substring(ind_3 + 1, ind_4 - ind_3 - 1));
-                otrack0.Opacity = Convert.ToDouble(received.Substring(ind_4 + 1, received.Length - ind_4 - 1)) / 100;
+                int p1, p2, p3, p4;
+                double p5;
+                if (Int32.TryParse(received.Substring(0, ind_1), out p1))
+                {
+                    otherFastTrack.X = p1;
+                }
+                if (Int32.TryParse(received.Substring(ind_1 + 1, ind_2 - ind_1 - 1), out p2))
+                {
+                    otherFastTrack.Y = p2;
+                }
+                if (Int32.TryParse(received.Substring(ind_2 + 1, ind_3 - ind_2 - 1), out p3))
+                {
+                    otherFixationTrack.X = p3;
+                }
+                if (Int32.TryParse(received.Substring(ind_3 + 1, ind_4 - ind_3 - 1), out p4))
+                {
+                    otherFixationTrack.Y = p4;
+                }
+                if (Double.TryParse(received.Substring(ind_4 + 1, received.Length - ind_4 - 1), out p5))
+                {
+                    otrack0.Opacity = p5 / 100;
+                }
+                //otherFastTrack.X = Convert.ToInt32(received.Substring(0, ind_1));
+                //otherFastTrack.Y = Convert.ToInt32(received.Substring(ind_1 + 1, ind_2 - ind_1 - 1));
+                //otherFixationTrack.X = Convert.ToInt32(received.Substring(ind_2 + 1, ind_3 - ind_2 - 1));
+                //otherFixationTrack.Y = Convert.ToInt32(received.Substring(ind_3 + 1, ind_4 - ind_3 - 1));
+                //otrack0.Opacity = Convert.ToDouble(received.Substring(ind_4 + 1, received.Length - ind_4 - 1)) / 100;
                 otrackLine.Opacity = otrack0.Opacity;
 
                 otherFixationTrack = PointFromScreen(otherFixationTrack);
