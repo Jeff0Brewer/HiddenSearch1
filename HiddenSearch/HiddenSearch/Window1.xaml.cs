@@ -83,6 +83,7 @@ namespace HiddenSearch
         Color orange = Color.FromArgb(255, 255, 128, 0);
         Color yellow = Color.FromArgb(255, 255, 255, 0);
         Color red = Color.FromArgb(255, 255, 0, 0);
+        int overlapCount = 0;
 
         int num_ellipses = 700;
         int ellipse_count = 0;
@@ -279,7 +280,33 @@ namespace HiddenSearch
             string timetemp = DateTime.Now.TimeOfDay.Subtract(timerStart).ToString();
             Timer.Text = timetemp.Substring(0, timetemp.Length - 8);
 
+            if (fixShift & fixationTrack.X != double.NaN & fixationTrack.Y != double.NaN)
+            {
+                fixationTrack = PointFromScreen(fixationTrack);
+                //Canvas.SetLeft(track1, Canvas.GetLeft(track0));
+                //Canvas.SetTop(track1, Canvas.GetTop(track0));
+                Canvas.SetLeft(track0, fixationTrack.X);
+                Canvas.SetTop(track0, fixationTrack.Y);
+                trackLine.X1 = fixationTrack.X + 5;
+                trackLine.Y1 = fixationTrack.Y + 5;
+                fadeTimer = 150;
+                //trackLine.X2 = Canvas.GetLeft(track1) + 10;
+                //trackLine.Y2 = Canvas.GetTop(track1) + 10;
+                fixShift = false;
+            }
+            fastTrack = PointFromScreen(fastTrack);
+            track0.Opacity = fadeTimer / 150;
+            trackLine.Opacity = fadeTimer / 150;
+            fadeTimer--;
+            double left = Canvas.GetLeft(track1);
+            double top = Canvas.GetTop(track1);
+            Canvas.SetLeft(track1, (fastTrack.X - left) / 1.3 + left);
+            Canvas.SetTop(track1, (fastTrack.Y - top) / 1.3 + top);
+            trackLine.X2 = Canvas.GetLeft(track1) + 5;
+            trackLine.Y2 = Canvas.GetTop(track1) + 5;
+
             sending = ((int)fastTrack.X).ToString() + "|" + ((int)fastTrack.Y).ToString() + ":" + ((int)fixationTrack.X).ToString() + "!" + ((int)fixationTrack.Y).ToString() + "(" + ((int)(100 * track0.Opacity)).ToString();
+            //received = sending;
             //If user pressed Receiver or Cursor button but communication haven't started yet or has terminated, start a thread on tryCommunicateReceiver()
             if (ReceiverOn && communication_started_Receiver == false)
             {
@@ -331,13 +358,13 @@ namespace HiddenSearch
                 //otrack0.Opacity = Convert.ToDouble(received.Substring(ind_4 + 1, received.Length - ind_4 - 1)) / 100;
                 otrackLine.Opacity = otrack0.Opacity;
 
-                otherFixationTrack = PointFromScreen(otherFixationTrack);
+                //otherFixationTrack = PointFromScreen(otherFixationTrack);
                 Canvas.SetLeft(otrack0, otherFixationTrack.X);
                 Canvas.SetTop(otrack0, otherFixationTrack.Y);
                 otrackLine.X1 = otherFixationTrack.X + 5;
                 otrackLine.Y1 = otherFixationTrack.Y + 5;
 
-                otherFastTrack = PointFromScreen(otherFastTrack);
+                //otherFastTrack = PointFromScreen(otherFastTrack);
                 Canvas.SetLeft(otrack1, otherFastTrack.X);
                 Canvas.SetTop(otrack1, otherFastTrack.Y);
                 otrackLine.X2 = Canvas.GetLeft(otrack1) + 5;
@@ -347,31 +374,6 @@ namespace HiddenSearch
                     addColor(orange, otherFastTrack.X, otherFastTrack.Y, ellipse_size); //heatmap
                 }
             }
-
-            if (fixShift & fixationTrack.X != double.NaN & fixationTrack.Y != double.NaN)
-            {
-                fixationTrack = PointFromScreen(fixationTrack);
-                //Canvas.SetLeft(track1, Canvas.GetLeft(track0));
-                //Canvas.SetTop(track1, Canvas.GetTop(track0));
-                Canvas.SetLeft(track0, fixationTrack.X);
-                Canvas.SetTop(track0, fixationTrack.Y);
-                trackLine.X1 = fixationTrack.X + 5;
-                trackLine.Y1 = fixationTrack.Y + 5;
-                fadeTimer = 150;
-                //trackLine.X2 = Canvas.GetLeft(track1) + 10;
-                //trackLine.Y2 = Canvas.GetTop(track1) + 10;
-                fixShift = false;
-            }
-            fastTrack = PointFromScreen(fastTrack);
-            track0.Opacity = fadeTimer / 150;
-            trackLine.Opacity = fadeTimer / 150;
-            fadeTimer--;
-            double left = Canvas.GetLeft(track1);
-            double top = Canvas.GetTop(track1);
-            Canvas.SetLeft(track1, (fastTrack.X - left) / 1.3 + left);
-            Canvas.SetTop(track1, (fastTrack.Y - top) / 1.3 + top);
-            trackLine.X2 = Canvas.GetLeft(track1) + 5;
-            trackLine.Y2 = Canvas.GetTop(track1) + 5;
 
             doubleTrack();
         }
@@ -392,13 +394,44 @@ namespace HiddenSearch
         private void addColor(Color color, double leftCoord, double topCoord, double size)
         {
             if (ellipse_count >= num_ellipses) { ellipse_count = 0; }
-            brush.Color = color;
             ellipses[ellipse_count].Visibility = Visibility.Visible;
             Canvas.SetLeft(ellipses[ellipse_count], leftCoord - size / 2);
             Canvas.SetTop(ellipses[ellipse_count], topCoord - size / 2);
-            ellipses[ellipse_count].Fill = brush;
+            //COLOR CONTROL START//
+            if (Math.Abs(Canvas.GetLeft(ellipses[ellipse_count]) - Canvas.GetLeft(ellipses[(ellipse_count + (num_ellipses - 1)) % num_ellipses])) < 50 &&
+                Math.Abs(Canvas.GetTop(ellipses[ellipse_count]) - Canvas.GetTop(ellipses[(ellipse_count + (num_ellipses - 1)) % num_ellipses])) < 50)
+            {
+                overlapCount++;
+            }
+            else
+            {
+                overlapCount = 0;
+            }
+            System.Windows.Media.Color fillcolor = System.Windows.Media.Colors.Yellow;
+            switch (overlapCount / 20)
+            {
+                case 0:
+                    fillcolor = System.Windows.Media.Colors.Yellow;
+                    break;
+                case 1:
+                    fillcolor = System.Windows.Media.Colors.Orange;
+                    break;
+                case 2:
+                    fillcolor = System.Windows.Media.Colors.DarkOrange;
+                    break;
+                case 3:
+                    fillcolor = System.Windows.Media.Colors.Red;
+                    break;
+                default:
+                    fillcolor = System.Windows.Media.Colors.DarkRed;
+                    break;
+            }
+            //COLOR CONTROL END//
+            //brush.Color = color;
+            ellipses[ellipse_count].Fill = new SolidColorBrush(fillcolor);
             ellipse_count++;
         }
+
         private void initializeHeatmap()
         {
             //after num_ellipses are set, it'll start replacing the oldest ellipses
