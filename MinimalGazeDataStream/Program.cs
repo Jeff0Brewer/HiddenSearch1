@@ -14,7 +14,7 @@ namespace MinimalGazeDataStream
         public static void Main(string[] args)
         {
             // SET ID FOR THIS COMPUTER //
-            string compID = "A";
+            string compID = "B";
 
             string path = "C:/Users/Master/Documents/gazelog/" + compID + "_" + DateTime.Now.ToString("MM-dd_hh-mm") + ".txt";
             string datapoint;

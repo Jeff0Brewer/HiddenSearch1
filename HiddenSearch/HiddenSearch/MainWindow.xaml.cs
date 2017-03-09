@@ -34,8 +34,8 @@ namespace HiddenSearch
         #region Variables
 
         //SETUP VARIABLES//
-        private static string defaultSenderIP = "169.254.41.115"; //169.254.41.115 A, 169.254.50.139 B
-        string compID = "A";
+        private static string defaultSenderIP = "169.254.50.139"; //169.254.41.115 A, 169.254.50.139 B
+        string compID = "B";
         int initialImg = 1; //1 for cats (img1), 2 for caterpillars (img2), 3 for mice (img3), 4 for (img4)
 
         // bool together = true; //Start together!
@@ -104,6 +104,7 @@ namespace HiddenSearch
         string path;
         string time;
         string datapoint;
+        string datapoint2;
         double timediff;
         #endregion
 
@@ -209,8 +210,10 @@ namespace HiddenSearch
             time = DateTime.Now.ToString("hh:mm:ss.fff");
             timediff = (currTime - prevTime);
             datapoint = "Img1: " + compID + " @ " + time + " - " + string.Format("{0:0.000} sec\n", timediff);
+            datapoint2 = "Wrong clicks: " + wrongClicks.ToString() + "\n";
             System.IO.StreamWriter file = new System.IO.StreamWriter(path, true);
             file.WriteLine(datapoint);
+            file.WriteLine(datapoint2);
             file.Close();
         }
 
@@ -399,18 +402,18 @@ namespace HiddenSearch
         }
 
         #region heatmap
-        private void addPermColor(Color color, double leftCoord, double topCoord, double size)
-        {
-            Ellipse fixEllipse = new Ellipse();
-            fixEllipse.Height = size;
-            fixEllipse.Width = size;
-            fixEllipse.Opacity = 0.01;
-            brush.Color = color;
-            fixEllipse.Fill = brush;
-            Canvas.SetLeft(fixEllipse, leftCoord - size / 2);
-            Canvas.SetTop(fixEllipse, topCoord - size / 2);
-            myCanvas.Children.Add(fixEllipse);
-        }
+        //private void addPermColor(Color color, double leftCoord, double topCoord, double size)
+        //{
+        //    Ellipse fixEllipse = new Ellipse();
+        //    fixEllipse.Height = size;
+        //    fixEllipse.Width = size;
+        //    fixEllipse.Opacity = 0.01;
+        //    brush.Color = color;
+        //    fixEllipse.Fill = brush;
+        //    Canvas.SetLeft(fixEllipse, leftCoord - size / 2);
+        //    Canvas.SetTop(fixEllipse, topCoord - size / 2);
+        //    myCanvas.Children.Add(fixEllipse);
+        //}
         private void addColor(Color color, double leftCoord, double topCoord, double size)
         {
             if (ellipse_count >= num_ellipses) { ellipse_count = 0; }
